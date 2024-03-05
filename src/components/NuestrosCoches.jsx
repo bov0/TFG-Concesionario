@@ -4,7 +4,7 @@ import { Opciones } from "./Opciones";
 
 export const NuestrosCoches = () => {
   return (
-    <div>
+    <div className="flex">
      <Opciones/>
      <Tarjeta/>
     </div>
