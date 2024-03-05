@@ -1,35 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+  Avatar,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
 } from "@nextui-org/react";
 
 const Nav = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <Navbar shouldHideOnScroll className="uppercase">
-      <NavbarBrand>
-        <h1>concesionario</h1>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <NavLink color="foreground" to="/Inicio">
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      open={isMenuOpen}
+      shouldHideOnScroll
+      className="uppercase"
+    >
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="md:hidden"
+        />
+        <NavbarBrand>
+          <NavLink color="foreground" to="/" className="text-lg">concesionario</NavLink>
+        </NavbarBrand>
+      </NavbarContent>
+      <NavbarContent className="hidden md:flex gap-4" justify="center">
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/NuestrosCoches">
             Nuestros coches
           </NavLink>
-        </NavbarItem>
-        <NavbarItem>
-          <NavLink color="foreground" to="/Inicio">
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/CompraCoche">
             Compramos tu coche
           </NavLink>
-        </NavbarItem>
-        <NavbarItem>
-          <NavLink color="foreground" to="/Inicio">
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/TrabajaConNosotros">
             Trabaja con nosotros
           </NavLink>
-        </NavbarItem>
+        </NavbarMenuItem>
       </NavbarContent>
+
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Avatar
+            isBordered
+            as="button"
+            className="transition-transform"
+            color="secondary"
+            name="Jason Hughes"
+            size="sm"
+            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+          />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Profile Actions" variant="flat">
+          <DropdownItem key="profile" className="h-14 gap-2">
+            <p className="font-semibold">Iniciada sesión como</p>
+            <p className="font-semibold">zoey@example.com</p>
+          </DropdownItem>
+          <DropdownItem key="ajustes">Ajustes</DropdownItem>
+          <DropdownItem key="ventas">Ventas</DropdownItem>
+          <DropdownItem key="logout" color="danger">
+            Cerrar Sesión
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+
+      <NavbarMenu justify="center" className="backdrop-blur-sm">
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/NuestrosCoches">
+            Nuestros coches
+          </NavLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/CompraCoche">
+            Compramos tu coche
+          </NavLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/TrabajaConNosotros">
+            Trabaja con nosotros
+          </NavLink>
+        </NavbarMenuItem>
+      </NavbarMenu>
     </Navbar>
   );
 };
