@@ -1,6 +1,7 @@
 import React from "react";
+import Parametro from "./Parametro";
 
-export const Opciones = () => {
+export const Sidebar = () => {
   return (
     <div>
       <button
@@ -31,19 +32,30 @@ export const Opciones = () => {
         class=" w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div class="h-full px-3 py-4 overflow-y-auto bg-indigo-500 dark:bg-gray-800">
+        <div class="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
           <ul class="space-y-2 font-medium">
-            <li>Marca</li>
-            <li>Modelo</li>
-            <li>Precio</li>
-            <li>Km</li>
-            <li>Año</li>
-            <li>Caja de cambios</li>
-            <li>Combustible</li>
-            <li>Distintivo medioambiental</li>
-            <li>Cilindrada</li>
-            <li>Tipo de Carroceria</li>
-            <li>Color</li>
+
+            <Parametro nombre="Marca" tipo="Select" opciones={['Toyota', 'Ford', 'Honda']} />
+
+            <Parametro nombre="Modelo" tipo="Select" opciones={['Civic', 'Corolla', 'Camry']} />
+
+            <Parametro nombre="Precio" tipo="Slider" minValue={0} maxValue={1000000} />
+
+            <Parametro nombre="Km" tipo="Slider" minValue={0} maxValue={800000} />
+
+            <Parametro nombre="Año" tipo="Select" opciones={['2022', '2021', '2020']} />
+
+            <Parametro nombre="Caja de cambios" tipo="Checkbox" opciones={['Manual', 'Automático']} />
+
+            <Parametro nombre="Combustible" tipo="Checkbox" opciones={['Gasolina', 'Diésel', 'Eléctrico']} />
+
+            <Parametro nombre="Distintivo medioambiental" tipo="Checkbox" opciones={['Eco', 'Cero', 'C']} />
+
+            <Parametro nombre="Cilindrada" tipo="Slider" minValue={60} maxValue={800000} defaultValue={60} />
+
+            <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={['Sedán', 'SUV', 'Hatchback']} />
+
+            <Parametro nombre="Color" tipo="Checkbox" opciones={['Rojo', 'Azul', 'Negro']} />
           </ul>
         </div>
       </aside>
