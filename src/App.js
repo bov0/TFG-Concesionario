@@ -6,7 +6,7 @@ import { NextUIProvider } from "@nextui-org/react";
 function App() {
   return (
     <NextUIProvider>
-      <main className="light text-foreground bg-background">
+      <main className="dark text-foreground bg-background">
         <Router>
           <Nav />
           <Routes>

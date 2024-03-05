@@ -9,14 +9,24 @@ import {
 
 const Nav = () => {
   return (
-    <Navbar shouldHideOnScroll>
+    <Navbar shouldHideOnScroll className="uppercase">
       <NavbarBrand>
         <h1>concesionario</h1>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <NavLink color="foreground" to="/Inicio">
-            Inicio
+            Nuestros coches
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink color="foreground" to="/Inicio">
+            Compramos tu coche
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink color="foreground" to="/Inicio">
+            Trabaja con nosotros
           </NavLink>
         </NavbarItem>
       </NavbarContent>
