@@ -7,7 +7,7 @@ export const NuestrosCoches = () => {
   return (
     <div className="flex">
      <Sidebar/>
-     <Tarjeta rating={4}/>
+     <Tarjeta/>
     </div>
   );
 };
