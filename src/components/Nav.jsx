@@ -14,8 +14,13 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 
+
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  var [isLogged, setIsLogged] = useState(false);
+  function logOut(){
+    setIsLogged(isLogged = false);
+  }
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
@@ -29,7 +34,9 @@ const Nav = () => {
           className="md:hidden"
         />
         <NavbarBrand>
-          <NavLink color="foreground" to="/" className="text-lg">concesionario</NavLink>
+          <NavLink color="foreground" to="/" className="text-lg">
+            concesionario
+          </NavLink>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden md:flex gap-4" justify="center">
@@ -63,15 +70,26 @@ const Nav = () => {
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-semibold">Iniciada sesión como</p>
-            <p className="font-semibold">zoey@example.com</p>
-          </DropdownItem>
-          <DropdownItem key="ajustes">Ajustes</DropdownItem>
-          <DropdownItem key="ventas">Ventas</DropdownItem>
-          <DropdownItem key="logout" color="danger">
-            Cerrar Sesión
-          </DropdownItem>
+          {isLogged ? (
+            <>
+              <DropdownItem key="profile" className="h-14 gap-2">
+                <p className="font-semibold">Iniciada sesión como</p>
+                <p className="font-semibold">zoey@example.com</p>
+              </DropdownItem>
+              <DropdownItem key="ajustes">Ajustes</DropdownItem>
+              <DropdownItem key="ventas">Ventas</DropdownItem>
+              <DropdownItem key="logout" color="danger" onClick={logOut}>
+                Cerrar Sesión
+              </DropdownItem>
+            </>
+          ) : (            
+            <>
+              <DropdownItem key="login">Iniciar Sesión</DropdownItem>
+              <p className="text-gray-500">
+                Debes iniciar sesión para acceder a esta sección.
+              </p>
+            </>
+          )}
         </DropdownMenu>
       </Dropdown>
 
