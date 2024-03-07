@@ -3,6 +3,7 @@ import Nav from './components/Nav';
 import Inicio from './components/Inicio';
 import { NextUIProvider } from "@nextui-org/react";
 import { NuestrosCoches } from './components/NuestrosCoches';
+import { Login } from './components/Login';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path='/NuestrosCoches' element={<NuestrosCoches/>}/>
+            <Route path='/Login' element={<Login/>}/>
           </Routes>
         </Router>
       </main>

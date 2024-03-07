@@ -1,11 +1,12 @@
 import React from "react";
-import { Tarjeta } from "./Tarjeta";
-import { Opciones } from "./Opciones";
+import { Tarjeta } from './Tarjeta';
+import { Sidebar } from "./Sidebar";
 
 export const NuestrosCoches = () => {
+
   return (
-    <div>
-     <Opciones/>
+    <div className="flex">
+     <Sidebar/>
      <Tarjeta/>
     </div>
   );
