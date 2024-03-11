@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
-import axios from "axios";
+import React from "react";
+import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 
-export const Tarjeta = () => {
-  const [coches, setCoches] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const result = await axios.get('http://127.0.0.1:8000/coches');
-      console.log(result.data);
-      setCoches(result.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
+const Tarjeta = ({ modeloNombre, marcaNombre, anio, imagen }) => {
   return (
-    <div>
-      {coches.map((coche) => (
-        <Card key={coche.id || Math.random()} className="py-4">
-        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <p className="text-tiny uppercase font-bold">{coche.id}</p>
-          <small className="text-default-500">{`Año ${coche.anio}`}</small>
-          <h4 className="font-bold text-large">{coche.modelo}</h4>
-          <p className="font-bold text-large">{`${coche.km} km`}</p>
-        </CardHeader>
-        <CardBody className="overflow-visible py-2"></CardBody>
-      </Card>
-      ))}
-    </div>
+    <Card className="py-4 h-min">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <h4 className="font-bold text-large">{modeloNombre}</h4>
+        <p className="text-default-500">{`Marca: ${marcaNombre}`}</p>
+        <small className="text-default-500">{`Año ${anio}`}</small>
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <Image
+          alt={`Imagen de ${modeloNombre}`}
+          className="object-cover rounded-xl py-3"
+          src={imagen || '../images/logo.jpg'}
+          width={270}
+          height={270}
+        />
+      <Button className="bg-purple-800 text-white font-bold">
+        Ver mas
+      </Button>  
+      </CardBody>
+    </Card>
   );
 };
+
+export default Tarjeta;
