@@ -1,22 +1,37 @@
-import React from "react";
-import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
+import { Card, CardHeader, CardBody } from "@nextui-org/react";
+import axios from "axios";
 
 export const Tarjeta = () => {
+  const [coches, setCoches] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const result = await axios.get('http://127.0.0.1:8000/coches');
+      console.log(result.data);
+      setCoches(result.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   return (
-    <Card className="py-4">
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <p className="text-tiny uppercase font-bold">Daily Mix</p>
-        <small className="text-default-500">12 Tracks</small>
-        <h4 className="font-bold text-large">Frontend Radio</h4>
-      </CardHeader>
-      <CardBody className="overflow-visible py-2">
-        <Image
-          alt="Card background"
-          className="object-cover rounded-xl"
-          src="/images/hero-card-complete.jpeg"
-          width={270}
-        />
-      </CardBody>
-    </Card>
+    <div>
+      {coches.map((coche) => (
+        <Card key={coche.id || Math.random()} className="py-4">
+        <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+          <p className="text-tiny uppercase font-bold">{coche.id}</p>
+          <small className="text-default-500">{`Año ${coche.anio}`}</small>
+          <h4 className="font-bold text-large">{coche.modelo}</h4>
+          <p className="font-bold text-large">{`${coche.km} km`}</p>
+        </CardHeader>
+        <CardBody className="overflow-visible py-2"></CardBody>
+      </Card>
+      ))}
+    </div>
   );
 };
