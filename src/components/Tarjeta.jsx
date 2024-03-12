@@ -12,7 +12,7 @@ const Tarjeta = ({ modeloNombre, marcaNombre, anio, imagen }) => {
       <CardBody className="overflow-visible py-2">
         <Image
           alt={`Imagen de ${modeloNombre}`}
-          className="object-cover rounded-xl py-3"
+          className="object-cover py-3 aspect-square"
           src={imagen || '../images/logo.jpg'}
           width={270}
           height={270}
