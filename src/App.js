@@ -5,6 +5,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import NuestrosCoches from './components/NuestrosCoches';
 import React from "react";
 import { Login } from './components/Login';
+import { Registro } from './components/Registro';
 
 function App() {
  
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path='/NuestrosCoches' element={<NuestrosCoches/>}/>
+            <Route path='/Registro' element={<Registro/>}/>
             <Route path='/Login' element={<Login/>}/>
           </Routes>
         </Router>
