@@ -1,8 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 
 export const Registro = () => {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      if (password !== repeatPassword) {
+        console.error('Las contraseñas no coinciden');
+        return;
+      }
+      
+      const newUser = {
+        email: email,
+        password: password,
+        firstName: firstName,
+        lastName: lastName
+      };
+      
+      const response = await axios.post('http://127.0.0.1:8000/usuarios', newUser);
+      
+      if (response.status === 201) {
+        console.log('Usuario registrado exitosamente');
+      } else {
+        console.error('Error al registrar el usuario');
+      }
+    } catch (error) {
+      console.error('Error al enviar la solicitud de registro', error);
+    }
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleRepeatPasswordChange = (event) => {
+    setRepeatPassword(event.target.value);
+  };
+
+  const handleFirstNameChange = (event) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastNameChange = (event) => {
+    setLastName(event.target.value);
   };
 
   return (
@@ -13,11 +62,13 @@ export const Registro = () => {
           name="floating_email"
           id="floating_email"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          value={email}
+          onChange={handleEmailChange}
           placeholder=" "
           required
         />
         <label
-          for="floating_email"
+          htmlFor="floating_email"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Email
@@ -29,11 +80,13 @@ export const Registro = () => {
           name="floating_password"
           id="floating_password"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          value={password}
+          onChange={handlePasswordChange}
           placeholder=" "
           required
         />
         <label
-          for="floating_password"
+          htmlFor="floating_password"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Contraseña
@@ -45,11 +98,13 @@ export const Registro = () => {
           name="repeat_password"
           id="floating_repeat_password"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          value={repeatPassword}
+          onChange={handleRepeatPasswordChange}
           placeholder=" "
           required
         />
         <label
-          for="floating_repeat_password"
+          htmlFor="floating_repeat_password"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Confirmar contraseña
@@ -62,11 +117,13 @@ export const Registro = () => {
             name="floating_first_name"
             id="floating_first_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            value={firstName}
+            onChange={handleFirstNameChange}
             placeholder=" "
             required
           />
           <label
-            for="floating_first_name"
+            htmlFor="floating_first_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Nombre
@@ -78,11 +135,13 @@ export const Registro = () => {
             name="floating_last_name"
             id="floating_last_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            value={lastName}
+            onChange={handleLastNameChange}
             placeholder=" "
             required
           />
           <label
-            for="floating_last_name"
+            htmlFor="floating_last_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Apellido
