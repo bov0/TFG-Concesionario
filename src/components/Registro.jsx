@@ -2,30 +2,37 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 export const Registro = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [Email, setEmail] = useState('');
+  const [contrasena, setContrasena] = useState('');
+  const [repetirContrasena, setRepetirContrasena] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario creado
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (password !== repeatPassword) {
-        console.error('Las contraseñas no coinciden');
+      if (contrasena !== repetirContrasena) {
+        console.error('Las contrasenas no coinciden');
         return;
       }
       
-      const newUser = {
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName
+      const nuevoUsuario = {        
+        nombre: nombre,
+        apellidos: apellido,
+        Email: Email,
+        contrasena: contrasena,
+        foto_perfil_blob: null
       };
       
-      const response = await axios.post('http://127.0.0.1:8000/usuarios', newUser);
+      const response = await axios.post('http://127.0.0.1:8000/usuarios', nuevoUsuario);
       
       if (response.status === 201) {
         console.log('Usuario registrado exitosamente');
+        // Si el backend devuelve el ID del usuario creado, lo asignamos al estado userId
+        if (response.data && response.data.id) {
+          setUserId(response.data.id);
+        }
       } else {
         console.error('Error al registrar el usuario');
       }
@@ -38,20 +45,20 @@ export const Registro = () => {
     setEmail(event.target.value);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleContrasenaChange = (event) => {
+    setContrasena(event.target.value);
   };
 
-  const handleRepeatPasswordChange = (event) => {
-    setRepeatPassword(event.target.value);
+  const handleRepetirContrasenaChange = (event) => {
+    setRepetirContrasena(event.target.value);
   };
 
-  const handleFirstNameChange = (event) => {
-    setFirstName(event.target.value);
+  const handleNombreChange = (event) => {
+    setNombre(event.target.value);
   };
 
-  const handleLastNameChange = (event) => {
-    setLastName(event.target.value);
+  const handleApellidoChange = (event) => {
+    setApellido(event.target.value);
   };
 
   return (
@@ -59,71 +66,71 @@ export const Registro = () => {
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
-          name="floating_email"
-          id="floating_email"
+          name="correo_electronico"
+          id="correo_electronico"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={email}
+          value={Email}
           onChange={handleEmailChange}
           placeholder=" "
           required
         />
         <label
-          htmlFor="floating_email"
+          htmlFor="correo_electronico"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Email
+          Correo Electrónico
         </label>
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="password"
-          name="floating_password"
-          id="floating_password"
+          name="contrasena"
+          id="contrasena"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={password}
-          onChange={handlePasswordChange}
+          value={contrasena}
+          onChange={handleContrasenaChange}
           placeholder=" "
           required
         />
         <label
-          htmlFor="floating_password"
+          htmlFor="contrasena"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Contraseña
+          Contrasena
         </label>
       </div>
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="password"
-          name="repeat_password"
-          id="floating_repeat_password"
+          name="repetir_contrasena"
+          id="repetir_contrasena"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={repeatPassword}
-          onChange={handleRepeatPasswordChange}
+          value={repetirContrasena}
+          onChange={handleRepetirContrasenaChange}
           placeholder=" "
           required
         />
         <label
-          htmlFor="floating_repeat_password"
+          htmlFor="repetir_contrasena"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Confirmar contraseña
+          Repetir Contrasena
         </label>
       </div>
       <div className="grid md:grid-cols-2 md:gap-6">
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
-            name="floating_first_name"
-            id="floating_first_name"
+            name="nombre"
+            id="nombre"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            value={firstName}
-            onChange={handleFirstNameChange}
+            value={nombre}
+            onChange={handleNombreChange}
             placeholder=" "
             required
           />
           <label
-            htmlFor="floating_first_name"
+            htmlFor="nombre"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Nombre
@@ -132,16 +139,16 @@ export const Registro = () => {
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
-            name="floating_last_name"
-            id="floating_last_name"
+            name="apellido"
+            id="apellido"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            value={lastName}
-            onChange={handleLastNameChange}
+            value={apellido}
+            onChange={handleApellidoChange}
             placeholder=" "
             required
           />
           <label
-            htmlFor="floating_last_name"
+            htmlFor="apellido"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Apellido
@@ -157,3 +164,4 @@ export const Registro = () => {
     </form>
   );
 };
+

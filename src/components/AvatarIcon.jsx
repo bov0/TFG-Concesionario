@@ -3,6 +3,7 @@ import { Avatar, DropdownTrigger, Dropdown, DropdownMenu, DropdownItem } from "@
 import { useAuth } from './AuthContext';
 
 export default function AvatarIcon() {
+  // Usar el hook useAuth para acceder al contexto de autenticación
   const { isAuthenticated, user, logout } = useAuth();
 
   return (
@@ -19,6 +20,7 @@ export default function AvatarIcon() {
         />
       </DropdownTrigger>
       <DropdownMenu aria-label="Profile Actions" variant="flat">
+        {/* Utiliza el valor de isAuthenticated para mostrar diferentes opciones en el menú */}
         {isAuthenticated ? (
           <>
             <DropdownItem key="profile" className="h-14 gap-2">
