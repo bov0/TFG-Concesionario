@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './AuthContext';
 
 export const Login = () => {
     const [nombre, setNombre] = useState('');
     const [password, setPassword] = useState('');
+    const { login, isAuthenticated } = useAuth();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/usuarios/${nombre}`);
+            const response = await axios.get(`http://127.0.0.1:8000/usuarios/nombre/${nombre}`);
             if (response.status === 200) {
                 const usuario = response.data;
                 if (usuario && usuario.contrasena === password) {
                     // La contraseña es correcta, puedes redirigir al usuario a otra página o realizar otras acciones aquí
                     console.log('Inicio de sesión exitoso');
+                    const id = (response.data.id);
+                    const userData = { id, nombre};
+                    login(userData);
+                    console.log(isAuthenticated)
                 } else {
                     // La contraseña es incorrecta, muestra un mensaje de error al usuario
                     console.error('Contraseña incorrecta');

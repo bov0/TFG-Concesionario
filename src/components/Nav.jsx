@@ -85,24 +85,6 @@ const Nav = () => {
       </NavbarContent>
 
       <NavbarMenu justify="center" className="backdrop-blur-sm">
-        {isLogged ? (
-          <>
-            <NavbarMenuItem>
-              <NavLink color="foreground" to="/MisCompras">
-                Mis compras
-              </NavLink>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <NavLink color="foreground" to="/Perfil">
-                Mi perfil
-              </NavLink>
-            </NavbarMenuItem>
-            <NavbarMenuItem onClick={handleLogout}>
-              Cerrar sesión
-            </NavbarMenuItem>
-          </>
-        ) : (
-          <>
             <NavbarMenuItem>
               <NavLink color="foreground" to="/NuestrosCoches">
                 Nuestros coches
@@ -128,8 +110,6 @@ const Nav = () => {
                 Registro
               </NavLink>
             </NavbarMenuItem>
-          </>
-        )}
       </NavbarMenu>
 
       <AvatarIcon />
