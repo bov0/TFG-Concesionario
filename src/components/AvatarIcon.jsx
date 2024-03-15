@@ -1,45 +1,37 @@
 import React from 'react';
-import { Avatar, DropdownTrigger, Dropdown, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import { useAuth } from './AuthContext';
+import { Link } from 'react-router-dom';
 
-export default function AvatarIcon() {
-  // Usar el hook useAuth para acceder al contexto de autenticación
-  const { isAuthenticated, user, logout } = useAuth();
+const AvatarIcon = () => {
+  const { isAuthenticated, logout } = useAuth();
 
   return (
-    <Dropdown placement="bottom-end">
+    <Dropdown>
       <DropdownTrigger>
-        <Avatar
-          isBordered
-          as="button"
-          className="transition-transform"
-          color="secondary"
-          name="Usuario Invitado"
-          size="sm"
-          src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        />
+        <Button variant="bordered">
+          <FontAwesomeIcon icon={faUser} />
+        </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Profile Actions" variant="flat">
-        {/* Utiliza el valor de isAuthenticated para mostrar diferentes opciones en el menú */}
+      <DropdownMenu aria-label="User Menu">
         {isAuthenticated ? (
-          <>
-            <DropdownItem key="profile" className="h-14 gap-2">
-              <p className="font-semibold">Iniciada sesión como</p>
-              <p className="font-semibold">{user && user.email}</p>
-            </DropdownItem>
-            <DropdownItem key="ajustes">Ajustes</DropdownItem>
-            <DropdownItem key="ventas">Ventas</DropdownItem>
-            <DropdownItem key="logout" color="danger" onClick={logout}>
-              Cerrar Sesión
-            </DropdownItem>
-          </>
+          <DropdownItem onClick={() => console.log("Mis compras")}>Mis compras</DropdownItem>
         ) : (
-          <>
-            <DropdownItem key="login">Iniciar Sesión</DropdownItem>
-            <DropdownItem key="registro">Registrarse</DropdownItem>
-          </>
+          <DropdownItem onClick={() => console.log("Iniciar Sesión")}><Link to="/login">Iniciar Sesión</Link></DropdownItem>
+        )}
+        {isAuthenticated ? (
+          <DropdownItem onClick={() => console.log("Ajustes de perfil")}>Ajustes de perfil</DropdownItem>
+        ) : (
+          <DropdownItem onClick={() => console.log("Registrarse")}><Link to="/registro">Registrarse</Link></DropdownItem>
+        )}
+        {isAuthenticated && (
+          <DropdownItem className="text-danger" onClick={logout} color="danger">Cerrar Sesión</DropdownItem>
         )}
       </DropdownMenu>
     </Dropdown>
   );
-}
+};
+
+export default AvatarIcon;
