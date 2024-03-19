@@ -22,7 +22,7 @@ const AvatarIcon = () => {
           <DropdownItem onClick={() => console.log("Iniciar Sesión")}><Link to="/login">Iniciar Sesión</Link></DropdownItem>
         )}
         {isAuthenticated ? (
-          <DropdownItem onClick={() => console.log("Ajustes de perfil")}>Ajustes de perfil</DropdownItem>
+          <DropdownItem onClick={() => console.log("Ajustes de perfil")}><Link to="/ajustes">Ajustes de perfil</Link></DropdownItem>
         ) : (
           <DropdownItem onClick={() => console.log("Registrarse")}><Link to="/registro">Registrarse</Link></DropdownItem>
         )}
