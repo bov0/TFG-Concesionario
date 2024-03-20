@@ -2,28 +2,37 @@ import React from 'react';
 import { Slider, Input, Select, SelectItem, Checkbox } from '@nextui-org/react';
 
 export default function Parametro(props) {
+    const { tipo, nombre, opciones, onChange } = props;
+
+    const handleSelectChange = (event) => {
+        if (onChange) {
+            onChange(event);
+        }
+    };
+
     const renderInput = () => {
-        switch (props.tipo) {
+        switch (tipo) {
             case 'Select':
                 return (
                     <div>
-                        <h1 className='font-semibold'>{props.nombre}</h1>
+                        <h1 className='font-semibold'>{nombre}</h1>
                         <Select
-                            placeholder={`Seleccione ${props.nombre}`}
+                            placeholder={`Seleccione ${nombre}`}
+                            aria-label={`Seleccione ${nombre}`}
+                            onChange={handleSelectChange} // Usar handleSelectChange en lugar de props.onChange directamente
                         >
-                            {props.opciones.map((opcion, index) => (
-                                <SelectItem key={index}>{opcion}</SelectItem>
+                            {opciones.map((opcion) => (
+                                <SelectItem key={opcion} value={opcion}>{opcion}</SelectItem>
                             ))}
                         </Select>
                     </div>
-
                 );
             case 'Slider':
                 return (
                     <div>
-                        <h1 className='font-semibold'>{props.nombre}</h1>
+                        <h1 className='font-semibold'>{nombre}</h1>
                         <Slider
-                            label={props.nombre}
+                            label={nombre}
                             step={props.step || 1000}
                             color="foreground"
                             maxValue={props.maxValue || 1}
@@ -37,16 +46,16 @@ export default function Parametro(props) {
             case 'Input':
                 return (
                     <Input
-                        label={props.nombre}
+                        label={nombre}
                         type="text"
-                        placeholder={`Ingrese ${props.nombre}`}
+                        placeholder={`Ingrese ${nombre}`}
                     />
                 );
             case 'Checkbox':
                 return (
                     <div className='flex flex-col flex-wrap'>
-                        <h1 className='font-semibold'>{props.nombre}</h1>
-                        {props.opciones.map((opcion) => (
+                        <h1 className='font-semibold'>{nombre}</h1>
+                        {opciones.map((opcion) => (
                             <Checkbox
                                 key={opcion}
                                 color="default"

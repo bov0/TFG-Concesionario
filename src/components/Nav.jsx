@@ -31,21 +31,21 @@ const Nav = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden md:flex gap-4" justify="center">
-            <NavbarMenuItem>
-              <NavLink color="foreground" to="/CompraCoche">
-                Compramos tu coche
-              </NavLink>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <NavLink color="foreground" to="/NuestrosCoches">
-                Coches Km 0
-              </NavLink>
-            </NavbarMenuItem>
-            <NavbarMenuItem>
-              <NavLink color="foreground" to="/TrabajaConNosotros">
-                Coches de Ocasion
-              </NavLink>
-            </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/NuestrosCoches">
+            Nuestros Coches
+          </NavLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/CompraCoche">
+            Compramos tu coche
+          </NavLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <NavLink color="foreground" to="/TrabajaConNosotros">
+            Coches de Ocasion
+          </NavLink>
+        </NavbarMenuItem>
       </NavbarContent>
       <NavbarContent className="ml-10">
         <AvatarIcon />
