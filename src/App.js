@@ -6,6 +6,7 @@ import NuestrosCoches from './components/NuestrosCoches';
 import React from "react";
 import { Login } from './components/Login';
 import { Registro } from './components/Registro';
+import { Ajustes } from './components/Ajustes';
 import { AuthProvider } from './components/AuthContext';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
               <Route path='/NuestrosCoches' element={<NuestrosCoches />} />
               <Route path='/Registro' element={<Registro />} />
               <Route path='/Login' element={<Login />} />
+              <Route path='/Ajustes' element={<Ajustes />} />
             </Routes>
           </Router>
         </main>
