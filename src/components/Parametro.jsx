@@ -10,6 +10,20 @@ export default function Parametro(props) {
         }
     };
 
+    const handleCheckboxChange = (value, checked) => {
+        onChange({ target: { value, checked } }); // Simulamos un evento con la estructura adecuada
+    };
+
+    const handleSliderChange = (newValue) => {
+        // Construye un objeto de evento simulado
+        const simulatedEvent = {
+            target: {
+                value: newValue
+            }
+        };
+        onChange(simulatedEvent);
+    };
+
     const renderInput = () => {
         switch (tipo) {
             case 'Select':
@@ -39,9 +53,9 @@ export default function Parametro(props) {
                             minValue={props.minValue || 0}
                             defaultValue={props.defaultValue || 0}
                             className="max-w-md"
+                            onChange={handleSliderChange} // Usar el método de manejo de cambio genérico para los sliders
                         />
                     </div>
-
                 );
             case 'Input':
                 return (
@@ -60,6 +74,8 @@ export default function Parametro(props) {
                                 key={opcion}
                                 color="default"
                                 label={opcion}
+                                value={opcion} // Añade el valor del checkbox
+                                onChange={(checked) => handleCheckboxChange(opcion, checked)} // Usa la función de manejo de cambio de checkbox
                                 defaultValue={props.defaultValue && props.defaultValue.includes(opcion)}
                             >
                                 {opcion}

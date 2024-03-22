@@ -4,6 +4,8 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
+  NavbarItem,
+  NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
@@ -31,6 +33,23 @@ const Nav = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden md:flex gap-4" justify="center">
+        <NavbarItem>
+          <NavLink color="foreground" to="/NuestrosCoches">
+            Nuestros Coches
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink color="foreground" to="/CompraCoche">
+            Compramos tu coche
+          </NavLink>
+        </NavbarItem>
+        <NavbarItem>
+          <NavLink color="foreground" to="/TrabajaConNosotros">
+            Coches de Ocasion
+          </NavLink>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarMenu>
         <NavbarMenuItem>
           <NavLink color="foreground" to="/NuestrosCoches">
             Nuestros Coches
@@ -46,7 +65,7 @@ const Nav = () => {
             Coches de Ocasion
           </NavLink>
         </NavbarMenuItem>
-      </NavbarContent>
+      </NavbarMenu>
       <NavbarContent className="ml-10">
         <AvatarIcon />
       </NavbarContent>
