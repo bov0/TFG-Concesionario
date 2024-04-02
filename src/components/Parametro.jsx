@@ -33,7 +33,7 @@ export default function Parametro(props) {
                         <Select
                             placeholder={`Seleccione ${nombre}`}
                             aria-label={`Seleccione ${nombre}`}
-                            onChange={handleSelectChange} // Usar handleSelectChange en lugar de props.onChange directamente
+                            onChange={handleSelectChange}
                         >
                             {opciones.map((opcion) => (
                                 <SelectItem key={opcion} value={opcion}>{opcion}</SelectItem>
@@ -47,13 +47,13 @@ export default function Parametro(props) {
                         <h1 className='font-semibold'>{nombre}</h1>
                         <Slider
                             label={nombre}
-                            step={props.step || 1000}
+                            step={props.step}
                             color="foreground"
                             maxValue={props.maxValue || 1}
                             minValue={props.minValue || 0}
                             defaultValue={props.defaultValue || 0}
                             className="max-w-md"
-                            onChange={handleSliderChange} // Usar el método de manejo de cambio genérico para los sliders
+                            onChange={handleSliderChange}
                         />
                     </div>
                 );
@@ -74,8 +74,8 @@ export default function Parametro(props) {
                                 key={opcion}
                                 color="default"
                                 label={opcion}
-                                value={opcion} // Añade el valor del checkbox
-                                onChange={(checked) => handleCheckboxChange(opcion, checked)} // Usa la función de manejo de cambio de checkbox
+                                value={opcion}
+                                onChange={(checked) => handleCheckboxChange(opcion, checked)}
                                 defaultValue={props.defaultValue && props.defaultValue.includes(opcion)}
                             >
                                 {opcion}
