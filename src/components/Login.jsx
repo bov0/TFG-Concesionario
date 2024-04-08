@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Utilizamos useNavigate en lugar de useHistory
 import { useAuth } from './AuthContext';
 
 export const Login = () => {
     const [nombre, setNombre] = useState('');
     const [password, setPassword] = useState('');
-    const { login, isAuthenticated } = useAuth();
+    const { login } = useAuth();
+    const navigate = useNavigate(); // Utilizamos useNavigate para la navegación
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,12 +16,12 @@ export const Login = () => {
             if (response.status === 200) {
                 const usuario = response.data;
                 if (usuario && usuario.contrasena === password) {
-                    // La contraseña es correcta, puedes redirigir al usuario a otra página o realizar otras acciones aquí
+                    // La contraseña es correcta, puedes redirigir al usuario a otra página
                     console.log('Inicio de sesión exitoso');
-                    const id = (response.data.id);
-                    const userData = { id, nombre};
+                    const id = response.data.id;
+                    const userData = { id, nombre };
                     login(userData);
-                    console.log(isAuthenticated)
+                    navigate('/'); // Redirige al usuario a la página de inicio
                 } else {
                     // La contraseña es incorrecta, muestra un mensaje de error al usuario
                     console.error('Contraseña incorrecta');

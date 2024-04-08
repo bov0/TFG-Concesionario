@@ -1,64 +1,51 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 export const Registro = () => {
-  const [Email, setEmail] = useState('');
-  const [contrasena, setContrasena] = useState('');
-  const [repetirContrasena, setRepetirContrasena] = useState('');
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [userId, setUserId] = useState(null); // Estado para almacenar el ID del usuario creado
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellidos: "",
+    email: "",
+    contrasena: "",
+    fotoPerfil: null,
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      if (contrasena !== repetirContrasena) {
-        console.error('Las contrasenas no coinciden');
-        return;
-      }
-      
-      const nuevoUsuario = {        
-        nombre: nombre,
-        apellidos: apellido,
-        Email: Email,
-        contrasena: contrasena,
-        foto_perfil_blob: null
-      };
-      
-      const response = await axios.post('http://127.0.0.1:8000/usuarios', nuevoUsuario);
-      
-      if (response.status === 201) {
-        console.log('Usuario registrado exitosamente');
-        // Si el backend devuelve el ID del usuario creado, lo asignamos al estado userId
-        if (response.data && response.data.id) {
-          setUserId(response.data.id);
-        }
-      } else {
-        console.error('Error al registrar el usuario');
-      }
-    } catch (error) {
-      console.error('Error al enviar la solicitud de registro', error);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      fotoPerfil: file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url = "http://127.0.0.1:8000/usuarios"; // Tu URL de la API aquí
+    const data = new FormData();
+    data.append("nombre", formData.nombre);
+    data.append("apellidos", formData.apellidos);
+    data.append("Email", formData.email);
+    data.append("contrasena", formData.contrasena);
+    if (formData.fotoPerfil) {
+      data.append("fotoPerfil", formData.fotoPerfil);
     }
-  };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleContrasenaChange = (event) => {
-    setContrasena(event.target.value);
-  };
-
-  const handleRepetirContrasenaChange = (event) => {
-    setRepetirContrasena(event.target.value);
-  };
-
-  const handleNombreChange = (event) => {
-    setNombre(event.target.value);
-  };
-
-  const handleApellidoChange = (event) => {
-    setApellido(event.target.value);
+    try {
+      await axios.post(url, data);
+      // Manejar el éxito, por ejemplo, limpiar el formulario o mostrar un mensaje de éxito
+      console.log("Usuario añadido con éxito");
+    } catch (error) {
+      // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
+      console.error("Error al añadir usuario:", error.message);
+    }
   };
 
   return (
@@ -66,16 +53,16 @@ export const Registro = () => {
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
-          name="correo_electronico"
-          id="correo_electronico"
+          name="email"
+          id="email"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={Email}
-          onChange={handleEmailChange}
+          value={formData.email}
+          onChange={handleChange}
           placeholder=" "
           required
         />
         <label
-          htmlFor="correo_electronico"
+          htmlFor="email"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Correo Electrónico
@@ -87,8 +74,8 @@ export const Registro = () => {
           name="contrasena"
           id="contrasena"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={contrasena}
-          onChange={handleContrasenaChange}
+          value={formData.contrasena}
+          onChange={handleChange}
           placeholder=" "
           required
         />
@@ -96,7 +83,7 @@ export const Registro = () => {
           htmlFor="contrasena"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Contrasena
+          Contraseña
         </label>
       </div>
       <div className="relative z-0 w-full mb-5 group">
@@ -105,8 +92,8 @@ export const Registro = () => {
           name="repetir_contrasena"
           id="repetir_contrasena"
           className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          value={repetirContrasena}
-          onChange={handleRepetirContrasenaChange}
+          value={formData.repetir_contrasena}
+          onChange={handleChange}
           placeholder=" "
           required
         />
@@ -114,7 +101,7 @@ export const Registro = () => {
           htmlFor="repetir_contrasena"
           className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
-          Repetir Contrasena
+          Repetir Contraseña
         </label>
       </div>
       <div className="grid md:grid-cols-2 md:gap-6">
@@ -124,8 +111,8 @@ export const Registro = () => {
             name="nombre"
             id="nombre"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            value={nombre}
-            onChange={handleNombreChange}
+            value={formData.nombre}
+            onChange={handleChange}
             placeholder=" "
             required
           />
@@ -139,20 +126,30 @@ export const Registro = () => {
         <div className="relative z-0 w-full mb-5 group">
           <input
             type="text"
-            name="apellido"
-            id="apellido"
+            name="apellidos"
+            id="apellidos"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            value={apellido}
-            onChange={handleApellidoChange}
+            value={formData.apellidos}
+            onChange={handleChange}
             placeholder=" "
             required
           />
           <label
-            htmlFor="apellido"
+            htmlFor="apellidos"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            Apellido
+            Apellidos
           </label>
+        </div>
+        <div className="hidden">
+          <label htmlFor="fotoPerfil">Foto de Perfil:</label>
+          <input
+            type="file"
+            id="fotoPerfil"
+            name="fotoPerfil"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
         </div>
       </div>
       <button
@@ -164,4 +161,3 @@ export const Registro = () => {
     </form>
   );
 };
-
