@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Parametro from "./Parametro";
+import { useFiltros } from "./FiltrosContext";
 import axios from "axios";
+import { Button } from "@nextui-org/react";
 
 export const Sidebar = () => {
 
+  const { setFiltros } = useFiltros();
   const [opcionesMarcas, setOpcionesMarcas] = useState([]);
   const [opcionesModelos, setOpcionesModelos] = useState([]);
   const [opcionesCajaCambios, setOpcionesCajaCambios] = useState([]);
@@ -12,29 +15,34 @@ export const Sidebar = () => {
   const [opcionesTipoCarr, setOpcionesTipoCarr] = useState([]);
   const [opcionesColor, setOpcionesColor] = useState([]);
 
-  const [filtros, setFiltros] = useState({
-    Marca: [],
-    Modelo: [],
-    Precio: [],
-    Kilometros: [],
-    Anio: [],
+  const filtrosIniciales = {
+    Marca: "",
+    Modelo: "",
+    Precio: "",
+    Kilometros: "",
+    Anio: "",
     cajaCambio: [],
     combustible: [],
     distAmbiental: [],
     Cilindrada: [],
-    Carroceria: [],
+    Carroceria: "",
     color: []
-  });
+  };
+
+  // Restablecer filtros
+  const resetearFiltros = () => {
+    setFiltros(filtrosIniciales);
+  };
 
   const ManejoCambioMarca = async (event) => {
     try {
-      const selectedMarcaName = event.target.value;
-      console.log(selectedMarcaName);
+      const NombreMarcaSeleccionada = event.target.value;
+      console.log(NombreMarcaSeleccionada);
 
       // Encontrar el objeto de la marca seleccionada por su nombre
-      const selectedMarca = opcionesMarcas.find(marca => marca.nombreMarca === selectedMarcaName);
+      const selectedMarca = opcionesMarcas.find(marca => marca.nombreMarca === NombreMarcaSeleccionada);
       if (!selectedMarca) {
-        console.error("No se encontró la marca seleccionada:", selectedMarcaName);
+        console.error("No se encontró la marca seleccionada:", NombreMarcaSeleccionada);
         return; // Salir de la función si no se encuentra la marca seleccionada
       }
 
@@ -45,7 +53,7 @@ export const Sidebar = () => {
       setOpcionesModelos(response.data.map((modelo) => modelo.nombre));
 
       // Actualizar el estado filtros con el id de la marca seleccionada para filtrar por id de la marca
-      setFiltros(prevState => ({ ...prevState, Marca: selectedMarca.id }));
+      setFiltros(prevState => ({ ...prevState, Marca: NombreMarcaSeleccionada }));
     } catch (error) {
       console.error("Error fetching modelos:", error);
     }
@@ -59,6 +67,15 @@ export const Sidebar = () => {
     } catch (error) {
       console.error("Error manejo cambio en modelo:", error);
     }
+  };
+
+  const generarOpcionesAnio = () => {
+    const opciones = [];
+    const anioActual = new Date().getFullYear();
+    for (let anio = anioActual; anio >= 2000; anio--) {
+      opciones.push(anio.toString());
+    }
+    return opciones;
   };
 
   const ManejoCambioPrecio = ({ target: { value: precio } }) => {
@@ -100,7 +117,6 @@ export const Sidebar = () => {
         : [...prevState.combustible, combustibleSeleccionado]; // Agregar el combustible si no está presente
 
       // Devolver un nuevo objeto de estado con el array actualizado
-      console.log(filtros)
       return { ...prevState, combustible: updatedCombustible };
     });
   };
@@ -138,7 +154,6 @@ export const Sidebar = () => {
         ? prevState.color.filter(item => item !== colorSeleccionado) // Eliminar el color
         : [...prevState.color, colorSeleccionado]; // Agregar el color si no está presente
 
-      // Devolver un nuevo objeto de estado con el array actualizado
       return { ...prevState, color: updatedColor };
     });
   };
@@ -196,7 +211,7 @@ export const Sidebar = () => {
 
             <Parametro nombre="Kilometros" tipo="Slider" minValue={0} maxValue={800000} onChange={ManejoCambioKm} />
 
-            <Parametro nombre="Año" tipo="Select" opciones={['2022', '2021', '2020']} onChange={ManejoCambioAnio} />
+            <Parametro nombre="Año" tipo="Select" opciones={generarOpcionesAnio()} onChange={ManejoCambioAnio} />
 
             <Parametro nombre="Caja de cambios" tipo="Checkbox" opciones={opcionesCajaCambios} onChange={ManejoCambioCajaCambios} />
 
@@ -204,11 +219,13 @@ export const Sidebar = () => {
 
             <Parametro nombre="Distintivo medioambiental" tipo="Checkbox" opciones={opcionesDistAmbiental} onChange={ManejoCambioDistAmbiental} />
 
-            <Parametro nombre="Cilindrada" tipo="Slider" minValue={60} maxValue={800000} defaultValue={60} onChange={ManejoCambioCilindrada} />
+            <Parametro nombre="Cilindrada" tipo="Slider" minValue={60} maxValue={1000} defaultValue={60} onChange={ManejoCambioCilindrada} />
 
             <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={opcionesTipoCarr} onChange={ManejoCambioCarroceria} />
 
             <Parametro nombre="Color" tipo="Checkbox" opciones={opcionesColor} onChange={ManejoCambioColor} />
+
+            <Button onClick={resetearFiltros}>Restablecer filtros</Button>
           </ul>
         </div>
       </aside>
