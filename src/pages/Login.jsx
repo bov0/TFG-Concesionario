@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
-
+import { useNavigate } from 'react-router-dom'
 export const Login = () => {
     const [nombre, setNombre] = useState('');
     const [password, setPassword] = useState('');

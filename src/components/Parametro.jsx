@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { Slider, Input, Select, SelectItem, Checkbox } from '@nextui-org/react';
 
 export default function Parametro(props) {
     const { tipo, nombre, opciones, onChange } = props;
+    const [sliderValue, setSliderValue] = useState(props.defaultValue || 0);
+    const [timeoutId, setTimeoutId] = useState(null);
 
     const handleSelectChange = (event) => {
         if (onChange) {
@@ -15,13 +17,19 @@ export default function Parametro(props) {
     };
 
     const handleSliderChange = (newValue) => {
-        // Construye un objeto de evento simulado
-        const simulatedEvent = {
-            target: {
-                value: newValue
-            }
-        };
-        onChange(simulatedEvent);
+        // Si hay un temporizador en ejecución, lo limpiamos
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+
+        // Establecemos un temporizador para actualizar el valor después de 2 segundos
+        const id = setTimeout(() => {
+            setSliderValue(newValue);
+            onChange({ target: { value: newValue } });
+        }, 2000);
+
+        // Guardamos el ID del temporizador
+        setTimeoutId(id);
     };
 
     const renderInput = () => {
@@ -49,9 +57,9 @@ export default function Parametro(props) {
                             label={nombre}
                             step={props.step}
                             color="foreground"
-                            maxValue={props.maxValue || 1}
-                            minValue={props.minValue || 0}
-                            defaultValue={props.defaultValue || 0}
+                            maxValue={props.maxValue}
+                            minValue={props.minValue}
+                            defaultValue={props.defaultValue}
                             className="max-w-md"
                             onChange={handleSliderChange}
                         />
