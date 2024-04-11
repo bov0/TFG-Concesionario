@@ -66,7 +66,7 @@ const Nav = () => {
           </NavLink>
         </NavbarMenuItem>
       </NavbarMenu>
-      <NavbarContent className="ml-10">
+      <NavbarContent className="ml-36 md:ml-10">
         <AvatarIcon />
       </NavbarContent>
     </Navbar>

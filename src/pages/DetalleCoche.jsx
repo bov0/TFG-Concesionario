@@ -43,7 +43,7 @@ const DetalleCoche = () => {
   if (!coche) {
     return (
       <div className="flex justify-center items-center h-screen w-screen flex-col md:flex-row">
-        <div className="flex justify-center items-center space-y-3">
+        <div className="flex justify-center flex-col items-center space-y-3">
           <Skeleton className="rounded-xl aspect-video w-96 md:w-[50vw] shadow-xl">
             <div className="rounded-xl bg-default-300 h-full w-full"></div>
           </Skeleton>

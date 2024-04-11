@@ -79,7 +79,7 @@ const NuestrosCoches = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-4 gap-4 justify-items-center w-full">
         {cargandoCoches ? (
           Array.from({ length: 15 }).map((_, index) => (
-            <Skeleton key={index} className=" md:w-[300px] md:h-[400px] rounded-lg" />
+            <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
           ))
         ) :
           (
