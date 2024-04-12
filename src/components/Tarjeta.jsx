@@ -14,7 +14,7 @@ const Tarjeta = ({
   combustible,
 }) => {
   return (
-    <NavLink to={`/coche/${id}`} className="flex justify-center hover:scale-[1.01] transition-all ease-in">
+    <NavLink to={`/coche/${id}`} className="flex justify-center hover:scale-[1.01] transition-all ease-in h-fit">
       <Card className="py-4 h-min bg-default-50">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <h4 className="font-bold text-large">{marcaNombre} {modeloNombre}</h4>

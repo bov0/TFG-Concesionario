@@ -158,26 +158,26 @@ export const Ajustes = () => {
   };
 
   return (
-    <>
-      <Navbar>
+    <div>
+      <Navbar className="shadow-xl">
         <NavbarContent>
           <NavbarItem>
-            <Link href="#">Establecer/Cambiar Foto de Perfil</Link>
+            <Link href="#" className="text-purple-800">Establecer/Cambiar Foto de Perfil</Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link href="#" onClick={handleEditUserClick}>
+            <Link href="#" className="text-purple-800" onClick={handleEditUserClick}>
               Editar mi Usuario
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="#" onClick={handleChangePasswordClick}>
+            <Link href="#" className="text-purple-800" onClick={handleChangePasswordClick}>
               Cambiar Contraseña
             </Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>
-            <Button color="primary" onClick={() => navigate("/")}>
+            <Button className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-xl" onClick={() => navigate("/")}>
               Volver
             </Button>
           </NavbarItem>
@@ -185,7 +185,7 @@ export const Ajustes = () => {
       </Navbar>
 
       {showChangePasswordForm && (
-        <form className="max-w-md mx-auto mt-3" onSubmit={handleSubmitNewPassword}>
+        <form className="max-w-md mx-auto mt-3 h-[85vh] flex flex-col justify-center items-center md:w-8/12" onSubmit={handleSubmitNewPassword}>
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
@@ -240,23 +240,23 @@ export const Ajustes = () => {
               Nueva Contraseña
             </label>
           </div>
-          <button
+          <Button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg"
           >
             Enviar
-          </button>
-          <button
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 focus:outline-none font-medium text-sm w-full sm:w-auto mt-3 px-5 py-2.5 text-center"
+          </Button>
+          <Button
+            className="bg-gradient-to-tr from-yellow-600 to-red-700 text-white font-bold shadow-lg mt-2"
             onClick={handleCancelChangePassword}
           >
             Cancelar
-          </button>
+          </Button>
         </form>
       )}
 
       {showEditUserForm && (
-        <form className="max-w-md mx-auto mt-3" onSubmit={handleSubmitEditUser}>
+        <form className="max-w-md mx-auto mt-3 h-[85vh] flex flex-col justify-center items-center md:w-8/12" onSubmit={handleSubmitEditUser}>
           <div className="relative z-0 w-full mb-5 group">
             <input
               type="text"
@@ -309,21 +309,21 @@ export const Ajustes = () => {
               Escribir para Cambiar el Apellidos
             </label>
           </div>
-          <button
+          <Button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg"
           >
             Enviar
-          </button>
-          <button
-            className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 focus:outline-none font-medium text-sm w-full sm:w-auto mt-3 px-5 py-2.5 text-center"
+          </Button>
+          <Button
+            className="bg-gradient-to-tr from-yellow-600 to-red-700 text-white font-bold shadow-lg mt-2"
             onClick={handleCancelEditUser}
           >
             Cancelar
-          </button>
+          </Button>
         </form>
       )}
-    </>
+    </div>
   );
 };
 
