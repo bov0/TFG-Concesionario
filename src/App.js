@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import Inicio from './pages/Inicio';
 import { NextUIProvider } from "@nextui-org/react";
 import NuestrosCoches from './pages/NuestrosCoches';
+import { CompraCoches } from './pages/CompraCoches';
 import { Login } from './pages/Login';
 import { Registro } from './pages/Registro';
 import { Ajustes } from './pages/Ajustes';
@@ -21,6 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path='/NuestrosCoches' element={<NuestrosCoches />} />
+              <Route path='/CompraCoche' element={<CompraCoches />} />
               <Route path='/Registro' element={<Registro />} />
               <Route path='/Login' element={<Login />} />
               <Route path='/Ajustes' element={<Ajustes />} />
