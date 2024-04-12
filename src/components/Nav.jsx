@@ -20,7 +20,7 @@ const Nav = () => {
       onMenuOpenChange={setIsMenuOpen}
       open={isMenuOpen}
       shouldHideOnScroll
-      className="uppercase"
+      className="uppercase bg-default-50 shadow-lg"
     >
       <NavbarContent>
         <NavbarMenuToggle
@@ -66,7 +66,7 @@ const Nav = () => {
           </NavLink>
         </NavbarMenuItem>
       </NavbarMenu>
-      <NavbarContent className="ml-10">
+      <NavbarContent className="ml-36 md:ml-10">
         <AvatarIcon />
       </NavbarContent>
     </Navbar>

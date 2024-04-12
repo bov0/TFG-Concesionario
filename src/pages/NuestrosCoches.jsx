@@ -3,10 +3,12 @@ import Tarjeta from '../components/Tarjeta';
 import { Sidebar } from "../components/Sidebar";
 import axios from "axios";
 import { FiltrosContext } from "../components/FiltrosContext";
+import { Skeleton } from "@nextui-org/react";
 
 const NuestrosCoches = () => {
   const { filtros } = useContext(FiltrosContext);
   const [coches, setCoches] = useState([]);
+  const [cargandoCoches, setCargandoCoches] = useState(true);
 
   useEffect(() => {
     fetchData();
@@ -14,6 +16,7 @@ const NuestrosCoches = () => {
 
   const fetchData = async () => {
     try {
+      setCargandoCoches(true)
       const cochesResult = await axios.get('http://127.0.0.1:8000/coches');
       const cochesConImagenes = await Promise.all(cochesResult.data.map(async (coche) => {
         try {
@@ -39,7 +42,7 @@ const NuestrosCoches = () => {
         const filtroMarca = !filtros.Marca.length || filtros.Marca.includes(coche.marcaNombre);
         const filtroModelo = !filtros.Modelo.length || filtros.Modelo.includes(coche.modeloNombre);
         const filtroPrecio = !filtros.Precio || coche.precio <= filtros.Precio;
-        const filtroKilometros = !filtros.Kilometros || coche.precio <= filtros.Kilometros ;
+        const filtroKilometros = !filtros.Kilometros || coche.precio <= filtros.Kilometros;
         const filtroAnio = !filtros.Anio.length || filtros.Anio.includes(coche.anio);
         const filtroCajaCambios = !filtros.cajaCambio.length || filtros.cajaCambio.includes(coche.cajaCambios);
         const filtroCombustible = !filtros.combustible.length || filtros.combustible.includes(coche.combustible);
@@ -47,7 +50,7 @@ const NuestrosCoches = () => {
         const filtroCilindrada = !filtros.Cilindrada || coche.cilindrada >= filtros.Cilindrada;
         const filtroCarroceria = !filtros.Carroceria.length || filtros.Carroceria.includes(coche.tipCarr);
         const filtroColor = !filtros.color.length || filtros.color.includes(coche.color);
-        
+
         return (
           filtroMarca &&
           filtroModelo &&
@@ -64,6 +67,7 @@ const NuestrosCoches = () => {
       });
 
       setCoches(cochesFiltrados);
+      setCargandoCoches(false);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -71,12 +75,19 @@ const NuestrosCoches = () => {
 
   return (
     <div className="flex">
-        <Sidebar />
-        <div className="flex-1 flex flex-wrap justify-center gap-4 py-4">
-          {coches.map((coche) => (
-            <Tarjeta key={coche.id} {...coche} />
-          ))}
-        </div>
+      <Sidebar />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-4 gap-4 justify-items-center w-full">
+        {cargandoCoches ? (
+          Array.from({ length: 15 }).map((_, index) => (
+            <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
+          ))
+        ) :
+          (
+            coches.map((coche) => (
+              <Tarjeta key={coche.id} {...coche} />
+            ))
+          )}
+      </div>
     </div>
   );
 };
