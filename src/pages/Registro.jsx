@@ -49,7 +49,7 @@ export const Registro = () => {
   };
 
   return (
-    <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+    <form className="max-w-md mx-auto mt-56" onSubmit={handleSubmit}>
       <div className="relative z-0 w-full mb-5 group">
         <input
           type="email"
