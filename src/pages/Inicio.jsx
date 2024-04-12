@@ -35,7 +35,7 @@ const Inicio = () => {
             Descubre la diferencia en GetMyCar. Tu próxima aventura en la carretera te espera aquí.
           </p>
         </aside>
-        <img src={imagenes.img1} alt="concesionario" className="rounded-xl"/>
+        <img src={imagenes.img2} alt="concesionario" className="rounded-xl"/>
       </section>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import AvatarIcon from "./AvatarIcon";
-import Logo from "./Logo";
+import imagenes from "../assets/imagenes";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,8 +28,9 @@ const Nav = () => {
           className="md:hidden"
         />
         <NavbarBrand>
-          <Logo />
-          <NavLink color="foreground" to="/" className="text-lg">concesionario</NavLink>
+          <NavLink color="foreground" to="/">
+            <img src={imagenes.img1} className="w-12 rounded-3xl" alt="" />
+          </NavLink>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden md:flex gap-4" justify="center">

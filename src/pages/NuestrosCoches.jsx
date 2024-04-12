@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import Tarjeta from '../components/Tarjeta';
 import { Sidebar } from "../components/Sidebar";
 import axios from "axios";
@@ -10,11 +10,7 @@ const NuestrosCoches = () => {
   const [coches, setCoches] = useState([]);
   const [cargandoCoches, setCargandoCoches] = useState(true);
 
-  useEffect(() => {
-    fetchData();
-  }, [filtros]); // Vuelve a cargar los datos cada vez que los filtros cambien
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setCargandoCoches(true)
       const cochesResult = await axios.get('http://127.0.0.1:8000/coches');
@@ -71,7 +67,11 @@ const NuestrosCoches = () => {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-  };
+  }, [filtros]);
+
+  useEffect(() => {
+    fetchData();
+  }, [filtros, fetchData]); 
 
   return (
     <div className="flex">
