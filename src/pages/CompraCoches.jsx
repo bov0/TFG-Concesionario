@@ -75,7 +75,7 @@ export const CompraCoches = () => {
         // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
         console.error("Error al añadir imagen:", error.message);
       }
-      console.log("Usuario añadido con éxito");
+      console.log("Coche añadido con éxito");
     } catch (error) {
       // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
       console.error("Error al añadir usuario:", error.message);
