@@ -22,8 +22,8 @@ const NuestrosCoches = () => {
             axios.get(`http://127.0.0.1:8000/imagenes-coche/imagen/${coche.id}`, { responseType: 'arraybuffer' })
           ]);
 
-          const marcaNombre = marcaResult.data.nombreMarca || '';
-          const modeloNombre = modeloResult.data.nombre || '';
+          const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
+          const modeloNombre = modeloResult.data.nombre || 'Error modelo';
           const imagenBlob = new Blob([imagenResult.data], { type: 'image/png' });
           const imagenURL = URL.createObjectURL(imagenBlob);
 
