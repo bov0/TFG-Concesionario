@@ -3,7 +3,6 @@ import { Slider, Input, Select, SelectItem, Checkbox } from '@nextui-org/react';
 
 export default function Parametro(props) {
     const { tipo, nombre, opciones, onChange } = props;
-    const [sliderValue, setSliderValue] = useState(props.defaultValue || 0);
     const [timeoutId, setTimeoutId] = useState(null);
 
     const handleSelectChange = (event) => {
@@ -24,7 +23,6 @@ export default function Parametro(props) {
 
         // Establecemos un temporizador para actualizar el valor después de 2 segundos
         const id = setTimeout(() => {
-            setSliderValue(newValue);
             onChange({ target: { value: newValue } });
         }, 2000);
 
