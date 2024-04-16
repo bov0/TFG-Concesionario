@@ -45,7 +45,7 @@ export const Login = () => {
     };
 
     return (
-        <div className='h-screen flex flex-col justify-center items-center mx-auto md:w-8/12'>
+        <div className='h-[90vh] flex flex-col justify-center items-center mx-auto md:w-8/12'>
             <h1 className='text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-800'>Iniciar Sesion</h1>
             <form className="max-w-md mx-auto rounded-xl py-24 px-12 border-solid border-2 border-pink-400" onSubmit={handleSubmit}>
                 <div className="relative z-0 w-full mb-5 group">

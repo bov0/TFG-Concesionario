@@ -10,6 +10,7 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import AvatarIcon from "./AvatarIcon";
+import CarritoIcon from "./CarritoIcon";
 import imagenes from "../assets/imagenes";
 
 const Nav = () => {
@@ -27,9 +28,9 @@ const Nav = () => {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="md:hidden"
         />
-        <NavbarBrand>
+        <NavbarBrand className="flex justify-center">
           <NavLink color="foreground" to="/">
-            <img src={imagenes.img1} className="w-12 rounded-3xl" alt="" />
+            <img src={imagenes.img1} className="w-24 sm:w-12 rounded-3xl" alt={imagenes.img1} />
           </NavLink>
         </NavbarBrand>
       </NavbarContent>
@@ -69,6 +70,9 @@ const Nav = () => {
       </NavbarMenu>
       <NavbarContent className="ml-36 md:ml-10">
         <AvatarIcon />
+      </NavbarContent>
+      <NavbarContent className="ml-36 md:ml-10">
+        <CarritoIcon />
       </NavbarContent>
     </Navbar>
   );

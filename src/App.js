@@ -10,6 +10,7 @@ import { Registro } from './pages/Registro';
 import { Ajustes } from './pages/Ajustes';
 import { AuthProvider } from './components/AuthContext';
 import { FiltrosProvider } from './components/FiltrosContext';
+import { CarritoProvider } from './components/carritoContext';
 import DetalleCoche from './pages/DetalleCoche';
 
 function App() {
@@ -17,18 +18,20 @@ function App() {
     <NextUIProvider>
       <AuthProvider>
         <FiltrosProvider>
-          <Router>
-            <Nav />
-            <Routes>
-              <Route path="/" element={<Inicio />} />
-              <Route path='/NuestrosCoches' element={<NuestrosCoches />} />
-              <Route path='/CompraCoche' element={<CompraCoches />} />
-              <Route path='/Registro' element={<Registro />} />
-              <Route path='/Login' element={<Login />} />
-              <Route path='/Ajustes' element={<Ajustes />} />
-              <Route path="/coche/:id" element={<DetalleCoche />} />
-            </Routes>
-          </Router>
+          <CarritoProvider>
+            <Router>
+              <Nav />
+              <Routes>
+                <Route path="/" element={<Inicio />} />
+                <Route path='/NuestrosCoches' element={<NuestrosCoches />} />
+                <Route path='/CompraCoche' element={<CompraCoches />} />
+                <Route path='/Registro' element={<Registro />} />
+                <Route path='/Login' element={<Login />} />
+                <Route path='/Ajustes' element={<Ajustes />} />
+                <Route path="/coche/:id" element={<DetalleCoche />} />
+              </Routes>
+            </Router>
+          </CarritoProvider>
         </FiltrosProvider>
       </AuthProvider>
     </NextUIProvider>

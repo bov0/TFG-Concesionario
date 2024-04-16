@@ -219,11 +219,11 @@ export const Sidebar = () => {
     </button>
       <aside
         id="sidebar-multi-level-sidebar"
-        class=" w-64 h-screen transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
+        className=" w-64 h-screen transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
         aria-label="Sidebar"
       >
-        <div class="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
-          <ul class="space-y-2 pt-10 font-medium">
+        <div className="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
+          <ul className="space-y-2 pt-10 font-medium">
 
             <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} onChange={ManejoCambioMarca} />
 

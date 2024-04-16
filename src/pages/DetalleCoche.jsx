@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Skeleton, Button } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../components/AuthContext";
+import { CarritoContext } from "../components/carritoContext";
+import { useCarrito } from "../components/carritoContext";
 
 const DetalleCoche = () => {
+
   const [coche, setCoche] = useState(null);
   const { id: cocheId } = useParams();
+  const { isAuthenticated } = useAuth();
+  const { setCarrito } = useContext(CarritoContext);
+  const { carrito } = useCarrito();
 
   useEffect(() => {
     const fetchCocheData = async () => {
@@ -30,7 +37,6 @@ const DetalleCoche = () => {
         const vendedorAvatarBlob = new Blob([vendedorAvatarResponse.data], { type: 'image/png' });
         const vendedorAvatarURL = URL.createObjectURL(vendedorAvatarBlob);
 
-        // Actualizar el estado del coche con la información obtenida
         setCoche({ ...cocheData, marcaNombre, modeloNombre, imagenURL, vendedorNombre, vendedorAvatarURL });
       } catch (error) {
         console.error("Error fetching coche data:", error);
@@ -39,6 +45,29 @@ const DetalleCoche = () => {
 
     fetchCocheData();
   }, [cocheId]);
+
+  const handleAgregarAlCarrito = () => {
+
+    if (isAuthenticated) {
+      const cocheExistente = carrito.find(item => item.id === coche.id);
+  
+    if (cocheExistente) {
+      console.log("El coche ya está en el carrito.");
+      return;
+    }
+  
+    const nuevoCoche = {
+      id: coche.id,
+      nombre: `${coche.marcaNombre}-${coche.modeloNombre}`,
+      precio: coche.precio
+    };
+  
+    setCarrito(prevCarrito => [...prevCarrito, nuevoCoche]);
+    } else {
+      console.log("Tienes que iniciar sesion")
+    }
+  };
+  
 
   if (!coche) {
     return (
@@ -86,7 +115,7 @@ const DetalleCoche = () => {
           <h1 className="text-2xl font-semibold">{coche.marcaNombre}-{coche.modeloNombre}</h1>
           <p>Año: {coche.anio}</p>
           <p className="text-lg">Precio: <span className="font-semibold">{coche.precio}€</span></p>
-          <Button className="absolute bottom-5 right-5 bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg">
+          <Button className="absolute bottom-5 right-5 bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg" onClick={handleAgregarAlCarrito}>
             Añadir al carrito
           </Button>
         </div>
