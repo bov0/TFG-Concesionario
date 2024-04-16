@@ -23,7 +23,7 @@ const CarritoIcon = () => {
       <DropdownMenu aria-label="User Menu">
         {isAuthenticated ? (
           carrito.map((coche, i) => (
-            <DropdownItem key={i} textValue={`${coche.nombre} - ${coche.precio}€`}>
+            <DropdownItem key={i} textValue={`${coche.nombre} - ${coche.precio}€`} onClick={() => navigate(`/Coche/${coche.id}`)}>
               {`${coche.nombre} ${coche.precio}€`}
               <button
                 className="ml-3 hover:bg-danger-500 px-3 py-2 rounded-xl"
@@ -37,6 +37,11 @@ const CarritoIcon = () => {
           <DropdownItem className='text-center' onClick={() => navigate('/Login')}>
             Debes Iniciar Sesión
           </DropdownItem>
+        )}
+        {isAuthenticated && (
+          <DropdownItem textValue='Ir al carrito' className='text-center' color="secondary" onClick={() => navigate('/Carrito')}>
+              Ir al carrito
+            </DropdownItem>
         )}
       </DropdownMenu>
     </Dropdown>

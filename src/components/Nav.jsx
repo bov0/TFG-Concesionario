@@ -11,7 +11,6 @@ import {
 } from "@nextui-org/react";
 import AvatarIcon from "./AvatarIcon";
 import CarritoIcon from "./CarritoIcon";
-import imagenes from "../assets/imagenes";
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,14 +22,14 @@ const Nav = () => {
       shouldHideOnScroll
       className="uppercase bg-default-50 shadow-lg"
     >
-      <NavbarContent>
+      <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="md:hidden"
         />
         <NavbarBrand className="flex justify-center">
           <NavLink color="foreground" to="/">
-            <img src={imagenes.img1} className="w-24 sm:w-12 rounded-3xl" alt={imagenes.img1} />
+            <p className="text-transparent bg-clip-text bg-indigo-400 font-extrabold text-3xl">GMC</p>
           </NavLink>
         </NavbarBrand>
       </NavbarContent>
@@ -68,10 +67,8 @@ const Nav = () => {
           </NavLink>
         </NavbarMenuItem>
       </NavbarMenu>
-      <NavbarContent className="ml-36 md:ml-10">
+      <NavbarContent justify="end">
         <AvatarIcon />
-      </NavbarContent>
-      <NavbarContent className="ml-36 md:ml-10">
         <CarritoIcon />
       </NavbarContent>
     </Navbar>

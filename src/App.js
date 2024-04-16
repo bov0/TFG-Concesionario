@@ -12,6 +12,7 @@ import { AuthProvider } from './components/AuthContext';
 import { FiltrosProvider } from './components/FiltrosContext';
 import { CarritoProvider } from './components/carritoContext';
 import DetalleCoche from './pages/DetalleCoche';
+import { CarritoCompra } from './pages/CarritoCompra';
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
                 <Route path='/Registro' element={<Registro />} />
                 <Route path='/Login' element={<Login />} />
                 <Route path='/Ajustes' element={<Ajustes />} />
-                <Route path="/coche/:id" element={<DetalleCoche />} />
+                <Route path="/Coche/:id" element={<DetalleCoche />} />
+                <Route path='/Carrito' element={<CarritoCompra/>}></Route>
               </Routes>
             </Router>
           </CarritoProvider>
