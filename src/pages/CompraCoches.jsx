@@ -172,134 +172,152 @@ export const CompraCoches = () => {
     return opciones;
   };
   return (
-    <div className="h-[90vh] flex flex-col justify-center items-center gap-4">
-      <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-800">
-        Vende tu coche
-      </h1>
-      <form className="max-w-md mx-auto p-5 rounded-xl border-solid border-2 border-purple-600" onSubmit={handleSubmit}>
-        <div className="grid md:grid-cols-2 md:gap-6 mt-5">
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} onChange={ManejoCambioMarca} />
+    <div className="h-dvh flex flex-col justify-center items-center gap-4">
+      <div className="shadow-2xl rounded-2xl flex flex-col justify-center items-center md:flex-row gap-0 w-full md:w-fit min-h-min backdrop-blur-3xl bg-white/30">
+        <div className="hidden md:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
+          <div className="h-52 w-[80%] bg-blue-950 rounded-full shadow-xl absolute left-0 top-16 z-10">
+            <div className="h-36 w-80 backdrop-blur-xl bg-white/30 shadow-xl absolute left-0 top-10 z-30"></div>
           </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Modelo" tipo="Select" opciones={opcionesModelos} onChange={(value) => handleChange("modelo", value)} />
+          <div className="h-44 w-[60%] bg-lime-200 rounded-r-full shadow-xl absolute left-0 top-44 z-20 flex items-center justify-center">
+            <h1 className="text-9xl font-extrabold z-50">GMC</h1>
+            <div className="h-36 w-80 backdrop-blur-xl bg-white/30 shadow-xl absolute left-20 top-32 z-20"></div>
           </div>
+          <div className="h-44 w-96 bg-purple-400 rounded-full shadow-xl absolute left-20 top-[22rem] z-10 flex items-center justify-center">
+            <p className="text-6xl font-extrabold absolute -bottom-7 z-50">MOTORS</p>
+          </div>
+          <p className="absolute top-56 right-28 z-40 font-extrabold text-6xl text-purple-400">*</p>
+          <p className="absolute top-20 left-36 z-40 font-extrabold text-6xl text-lime-200">*</p>
+          <p className="absolute top-96 left-16 z-40 font-extrabold text-6xl text-blue-950">*</p>
         </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              type="number"
-              name="precio"
-              id="precio"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
-              value={formData.precio}
-              onChange={(event) => handleChange("precio", event.target.value)}
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="precio"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Precio
-            </label>
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              type="number"
-              name="km"
-              id="km"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
-              value={formData.km}
-              onChange={(event) => handleChange("km", event.target.value)}
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="km"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Kilómetros
-            </label>
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Año" tipo="Select" opciones={generarOpcionesAnio()} onChange={(value) => handleChange("anio", value)} />
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Caja de cambios" tipo="Select" opciones={opcionesCajaCambios} onChange={(value) => handleChange("cajaCambio", value)} />
-          </div>
-        </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Combustible" tipo="Select" opciones={opcionesCombustible} onChange={(value) => handleChange("combust", value)} />
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Distintivo Ambiental" tipo="Select" opciones={opcionesDistAmbiental} onChange={(value) => handleChange("distAmbiental", value)} />
-          </div>
-        </div>
-        <div className="grid md:grid-cols-3 md:gap-6 items-center">
-          <div className="relative z-0 w-full mb-5 group">
-            <input
-              type="number"
-              name="cilindrada"
-              id="cilindrada"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
-              value={formData.cilindrada}
-              onChange={(event) => handleChange("cilindrada", event.target.value)}
-              placeholder=" "
-              required
-            />
-            <label
-              htmlFor="cilindrada"
-              className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-            >
-              Cilindrada
-            </label>
-          </div>
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={opcionesTipoCarr} onChange={(value) => handleChange("tipCarr", value)} />
-          </div>
+        <div className="md:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl">
+          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-800">
+            Vende tu coche
+          </h1>
+          <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+            <div className="grid grid-cols-2 gap-6 mt-5">
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} onChange={ManejoCambioMarca} />
+              </div>
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Modelo" tipo="Select" opciones={opcionesModelos} onChange={(value) => handleChange("modelo", value)} />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative z-0 w-full mb-5 group">
+                <input
+                  type="number"
+                  name="precio"
+                  id="precio"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+                  value={formData.precio}
+                  onChange={(event) => handleChange("precio", event.target.value)}
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="precio"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                  Precio
+                </label>
+              </div>
+              <div className="relative z-0 w-full mb-5 group">
+                <input
+                  type="number"
+                  name="km"
+                  id="km"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+                  value={formData.km}
+                  onChange={(event) => handleChange("km", event.target.value)}
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="km"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                  Kilómetros
+                </label>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Año" tipo="Select" opciones={generarOpcionesAnio()} onChange={(value) => handleChange("anio", value)} />
+              </div>
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Caja de cambios" tipo="Select" opciones={opcionesCajaCambios} onChange={(value) => handleChange("cajaCambio", value)} />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Combustible" tipo="Select" opciones={opcionesCombustible} onChange={(value) => handleChange("combust", value)} />
+              </div>
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Distintivo Ambiental" tipo="Select" opciones={opcionesDistAmbiental} onChange={(value) => handleChange("distAmbiental", value)} />
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-6 items-center">
+              <div className="relative z-0 w-full mb-5 group">
+                <input
+                  type="number"
+                  name="cilindrada"
+                  id="cilindrada"
+                  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+                  value={formData.cilindrada}
+                  onChange={(event) => handleChange("cilindrada", event.target.value)}
+                  placeholder=" "
+                  required
+                />
+                <label
+                  htmlFor="cilindrada"
+                  className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                  Cilindrada
+                </label>
+              </div>
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={opcionesTipoCarr} onChange={(value) => handleChange("tipCarr", value)} />
+              </div>
 
-          <div className="relative z-0 w-full mb-5 group">
-            <Parametro nombre="Color" tipo="Select" opciones={opcionesColor} onChange={(value) => handleChange("color", value)} />
-          </div>
-        </div>
-        <div className="relative z-0 w-full mb-5 group">
-          <label
-            htmlFor="imagenCoche"
-            className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400"
-          >
-            Imagen del Coche
-          </label>
-          <input
-            type="file"
-            id="imagenCoche"
-            name="imagenCoche"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="hidden"
-          />
-          <div className="flex items-center justify-center w-full">
-            <label
-              htmlFor="imagenCoche"
-              className="flex items-center justify-center w-full h-32 px-4 py-6 bg-white text-purple-700 rounded-lg shadow-lg tracking-wide uppercase border border-purple-700 cursor-pointer hover:bg-purple-700 hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+              <div className="relative z-0 w-full mb-5 group">
+                <Parametro nombre="Color" tipo="Select" opciones={opcionesColor} onChange={(value) => handleChange("color", value)} />
+              </div>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+              <label
+                htmlFor="imagenCoche"
+                className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400"
+              >
+                Imagen del Coche
+              </label>
+              <input
+                type="file"
+                id="imagenCoche"
+                name="imagenCoche"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              <div className="flex items-center justify-center w-full">
+                <label
+                  htmlFor="imagenCoche"
+                  className="flex items-center justify-center w-full h-32 px-4 py-6 bg-white text-purple-700 rounded-lg shadow-lg tracking-wide uppercase border border-purple-700 cursor-pointer hover:bg-purple-700 hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+                >
+                  <span className="ml-2 text-base leading-normal">
+                    {selectedImage ? selectedImage : 'Seleccionar Imagen'}
+                  </span>
+                </label>
+              </div>
+            </div>
+            <Button
+              type="submit"
+              className="bg-lime-200 font-bold shadow-xl"
             >
-              <span className="ml-2 text-base leading-normal">
-                {selectedImage ? selectedImage : 'Seleccionar Imagen'}
-              </span>
-            </label>
-          </div>
+              Enviar
+            </Button>
+          </form>
         </div>
-        <Button
-          type="submit"
-          className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-xl"
-        >
-          Enviar
-        </Button>
-      </form>
-
+      </div>
     </div>
   );
 };

@@ -77,10 +77,10 @@ const DetalleCoche = () => {
             <div className="rounded-xl bg-default-300 h-full w-full"></div>
           </Skeleton>
           <section className="flex md:justify-around align-middle flex-wrap flex-col md:flex-row mt-2 text-default-500 md:w-[50vw] bg-default-50 p-5 rounded-xl shadow-xl">
-            <Skeleton className="w-1/2 md:w-3/5 h-4 rounded-lg mb-3 md:mb-0" />
-            <Skeleton className="w-1/4 md:w-2/5 h-4 rounded-lg mb-3 md:mb-0" />
-            <Skeleton className="w-1/4 md:w-2/5 h-4 rounded-lg mb-3 md:mb-0" />
-            <Skeleton className="w-1/2 md:w-3/5 h-4 rounded-lg mb-3 md:mb-0" />
+            <Skeleton className="w-1/4 md:w-1/4 h-4 rounded-lg mb-3 md:mb-0" />
+            <Skeleton className="w-1/4 md:w-1/4 h-4 rounded-lg mb-3 md:mb-0" />
+            <Skeleton className="w-1/4 md:w-1/4 h-4 rounded-lg mb-3 md:mb-0" />
+            <Skeleton className="w-1/4 md:w-1/4 h-4 rounded-lg mb-3 md:mb-0" />
           </section>
         </div>
         <aside className="flex flex-col gap-3 md:gap-5 w-96">
