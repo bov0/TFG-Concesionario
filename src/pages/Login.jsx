@@ -9,6 +9,8 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const { login } = useAuth();
     const navigate = useNavigate();
+    const [hayError, setHayError] = useState(false);
+    const [error, setError] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,14 +27,18 @@ export const Login = () => {
                     navigate('/'); // Redirige al usuario a la página de inicio
                 } else {
                     // La contraseña es incorrecta, muestra un mensaje de error al usuario
-                    console.error('Contraseña incorrecta');
+                    setError("La contraseña ingresada es incorrecta");
+                    setHayError(true);
                 }
             } else {
                 // El inicio de sesión falló, puedes mostrar un mensaje de error al usuario aquí
-                console.error('Error al iniciar sesión');
+                setError("Error al iniciar sesión");
+                setHayError(true);
             }
         } catch (error) {
             console.error('Error al enviar la solicitud de inicio de sesión o usuario inexistente');
+            setError("Usuario inexistente");
+            setHayError(true);
         }
     };
 
@@ -62,8 +68,8 @@ export const Login = () => {
                     <p className="absolute top-20 left-36 z-40 font-extrabold text-6xl text-lime-200">*</p>
                     <p className="absolute top-96 left-16 z-40 font-extrabold text-6xl text-blue-950">*</p>
                 </div>
-                <div className='flex items-center justify-center flex-col w-6/12'>
-                    <h1 className='text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-800'>Iniciar Sesion</h1>
+                <div className='flex items-center justify-center flex-col w-6/12 md:px-40'>
+                    <h1 className='w-full text-center text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800'>Iniciar Sesion</h1>
                     <form className="w-full h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl" onSubmit={handleSubmit}>
                         <div className="relative z-0 w-full mb-5 group">
                             <input
@@ -103,11 +109,14 @@ export const Login = () => {
                         </div>
                         <Button
                             type="submit"
-                            className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-xl"
+                            className="bg-lime-200 font-bold shadow-xl"
                         >
                             Enviar
                         </Button>
                     </form>
+                    {hayError && (
+                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-16'>{error}</p>
+                    )}
                 </div>
             </div>
         </div>

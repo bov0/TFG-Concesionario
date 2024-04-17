@@ -16,35 +16,45 @@ const CarritoIcon = () => {
   };
 
   return (
-    <Dropdown className='flex justify-center'>
-      <DropdownTrigger className='flex justify-center'>
-        <FontAwesomeIcon icon={faCartShopping} />
-      </DropdownTrigger>
-      <DropdownMenu aria-label="User Menu">
-        {isAuthenticated ? (
-          carrito.map((coche, i) => (
-            <DropdownItem key={i} textValue={`${coche.nombre} - ${coche.precio}€`} onClick={() => navigate(`/Coche/${coche.id}`)}>
-              {`${coche.nombre} ${coche.precio}€`}
-              <button
-                className="ml-3 hover:bg-danger-500 px-3 py-2 rounded-xl"
-                onClick={() => eliminarDelCarrito(i)}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
+    <div className='flex justify-center items-center relative'>
+      <Dropdown className='flex justify-center items-center'>
+        <DropdownTrigger className='flex justify-center'>
+          <FontAwesomeIcon icon={faCartShopping} className='h-5' />
+        </DropdownTrigger>
+        <DropdownMenu aria-label="User Menu">
+          {isAuthenticated ? (
+            carrito.map((coche, i) => (
+              <DropdownItem key={i} textValue={`${coche.nombre} - ${coche.precio}€`} onClick={() => navigate(`/Coche/${coche.id}`)}>
+                <div className='flex items-center justify-between'>
+                  {`${coche.nombre} ${coche.precio}€`}
+                  <button
+                    className="hover:bg-danger-500 px-3 py-2 rounded-xl"
+                    onClick={() => eliminarDelCarrito(i)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
+              </DropdownItem>
+            ))
+          ) : (
+            <DropdownItem className='text-center' onClick={() => navigate('/Login')}>
+              Debes Iniciar Sesión
             </DropdownItem>
-          ))
-        ) : (
-          <DropdownItem className='text-center' onClick={() => navigate('/Login')}>
-            Debes Iniciar Sesión
-          </DropdownItem>
-        )}
-        {isAuthenticated && (
-          <DropdownItem textValue='Ir al carrito' className='text-center' color="secondary" onClick={() => navigate('/Carrito')}>
+          )}
+          {isAuthenticated && (
+            <DropdownItem textValue='Ir al carrito' className='text-center' color="secondary" onClick={() => navigate('/Carrito')}>
               Ir al carrito
             </DropdownItem>
-        )}
-      </DropdownMenu>
-    </Dropdown>
+          )}
+        </DropdownMenu>
+      </Dropdown>
+      {carrito.length > 0 && (
+        <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 -top-3 right-1"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 -top-3 right-1 z-30"></span>
+      </span>
+      )}
+    </div>
   );
 };
 

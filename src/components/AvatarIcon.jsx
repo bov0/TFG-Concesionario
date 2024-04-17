@@ -11,18 +11,18 @@ const AvatarIcon = () => {
   return (
     <Dropdown className='w-fit flex justify-center'>
       <DropdownTrigger className='w-fit flex justify-center'>
-          <FontAwesomeIcon icon={faUser} />
+          <FontAwesomeIcon icon={faUser} className='h-5'/>
       </DropdownTrigger>
       <DropdownMenu aria-label="User Menu">
         {isAuthenticated ? (
-          <DropdownItem textValue='Mis compras' onClick={() => console.log("Mis compras")}>Mis compras</DropdownItem>
+          <DropdownItem textValue='Mis compras'>Mis compras</DropdownItem>
         ) : (
-          <DropdownItem textValue='Iniciar sesion' onClick={() => console.log("Iniciar Sesión")}><Link to="/login">Iniciar Sesión</Link></DropdownItem>
+          <DropdownItem textValue='Iniciar sesion'><Link to="/login">Iniciar Sesión</Link></DropdownItem>
         )}
         {isAuthenticated ? (
           <DropdownItem textValue='Ajustes perfil' onClick={() => console.log("Ajustes de perfil")}><Link to="/ajustes">Ajustes de perfil</Link></DropdownItem>
         ) : (
-          <DropdownItem textValue='Registrarse' onClick={() => console.log("Registrarse")}><Link to="/registro">Registrarse</Link></DropdownItem>
+          <DropdownItem textValue='Registrarse'><Link to="/registro">Registrarse</Link></DropdownItem>
         )}
         {isAuthenticated && (
           <DropdownItem textValue='Cerrar sesion' className="text-danger" onClick={logout} color="danger">Cerrar Sesión</DropdownItem>

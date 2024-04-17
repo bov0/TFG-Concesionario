@@ -190,16 +190,16 @@ export const CompraCoches = () => {
           <p className="absolute top-96 left-16 z-40 font-extrabold text-6xl text-blue-950">*</p>
         </div>
         <div className="md:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl">
-          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-800">
+          <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800">
             Vende tu coche
           </h1>
           <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-6 mt-5">
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} onChange={ManejoCambioMarca} />
+                <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} variant="underlined" onChange={ManejoCambioMarca} />
               </div>
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Modelo" tipo="Select" opciones={opcionesModelos} onChange={(value) => handleChange("modelo", value)} />
+                <Parametro nombre="Modelo" tipo="Select" opciones={opcionesModelos} variant="underlined" onChange={(value) => handleChange("modelo", value)} />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
@@ -242,18 +242,18 @@ export const CompraCoches = () => {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Año" tipo="Select" opciones={generarOpcionesAnio()} onChange={(value) => handleChange("anio", value)} />
+                <Parametro nombre="Año" tipo="Select" opciones={generarOpcionesAnio()} variant="underlined" onChange={(value) => handleChange("anio", value)} />
               </div>
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Caja de cambios" tipo="Select" opciones={opcionesCajaCambios} onChange={(value) => handleChange("cajaCambio", value)} />
+                <Parametro nombre="Caja de cambios" tipo="Select" opciones={opcionesCajaCambios} variant="underlined" onChange={(value) => handleChange("cajaCambio", value)} />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Combustible" tipo="Select" opciones={opcionesCombustible} onChange={(value) => handleChange("combust", value)} />
+                <Parametro nombre="Combustible" tipo="Select" opciones={opcionesCombustible} variant="underlined" onChange={(value) => handleChange("combust", value)} />
               </div>
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Distintivo Ambiental" tipo="Select" opciones={opcionesDistAmbiental} onChange={(value) => handleChange("distAmbiental", value)} />
+                <Parametro nombre="Distintivo Ambiental" tipo="Select" opciones={opcionesDistAmbiental} variant="underlined" onChange={(value) => handleChange("distAmbiental", value)} />
               </div>
             </div>
             <div className="grid grid-cols-3 gap-6 items-center">
@@ -276,11 +276,11 @@ export const CompraCoches = () => {
                 </label>
               </div>
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={opcionesTipoCarr} onChange={(value) => handleChange("tipCarr", value)} />
+                <Parametro nombre="Tipo de Carroceria" tipo="Select" opciones={opcionesTipoCarr} variant="underlined" onChange={(value) => handleChange("tipCarr", value)} />
               </div>
 
               <div className="relative z-0 w-full mb-5 group">
-                <Parametro nombre="Color" tipo="Select" opciones={opcionesColor} onChange={(value) => handleChange("color", value)} />
+                <Parametro nombre="Color" tipo="Select" opciones={opcionesColor} variant="underlined" onChange={(value) => handleChange("color", value)} />
               </div>
             </div>
             <div className="relative z-0 w-full mb-5 group">

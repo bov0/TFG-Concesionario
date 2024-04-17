@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import { Slider, Input, Select, SelectItem, Checkbox } from '@nextui-org/react';
 
 export default function Parametro(props) {
-    const { tipo, nombre, opciones, onChange } = props;
+    const { tipo, nombre, opciones, onChange, variant } = props;
     const [timeoutId, setTimeoutId] = useState(null);
 
     const handleSelectChange = (event) => {
@@ -40,6 +40,7 @@ export default function Parametro(props) {
                             placeholder={`Seleccione ${nombre}`}
                             aria-label={`Seleccione ${nombre}`}
                             onChange={handleSelectChange}
+                            variant={variant}
                         >
                             {opciones.map((opcion) => (
                                 <SelectItem key={opcion} value={opcion}>{opcion}</SelectItem>
