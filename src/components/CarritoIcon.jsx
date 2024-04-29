@@ -19,14 +19,14 @@ const CarritoIcon = () => {
     <div className='flex justify-center items-center relative'>
       <Dropdown className='flex justify-center items-center'>
         <DropdownTrigger className='flex justify-center'>
-          <FontAwesomeIcon icon={faCartShopping} className='h-5' />
+          <FontAwesomeIcon icon={faCartShopping} className="h-5 hover:text-purple-600 font-semibold duration-300" />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Menu">
           {isAuthenticated ? (
             carrito.map((coche, i) => (
-              <DropdownItem key={i} textValue={`${coche.nombre} - ${coche.precio}€`} onClick={() => navigate(`/Coche/${coche.id}`)}>
+              <DropdownItem key={i} textValue={`${coche.marcaNombre}-${coche.modeloNombre} - ${coche.precio}€`} onClick={() => navigate(`/Coche/${coche.id}`)}>
                 <div className='flex items-center justify-between'>
-                  {`${coche.nombre} ${coche.precio}€`}
+                  {`${coche.marcaNombre}-${coche.modeloNombre} ${coche.precio}€`}
                   <button
                     className="hover:bg-danger-500 px-3 py-2 rounded-xl"
                     onClick={() => eliminarDelCarrito(i)}
@@ -49,9 +49,9 @@ const CarritoIcon = () => {
         </DropdownMenu>
       </Dropdown>
       {carrito.length > 0 && (
-        <span class="relative flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 -top-3 right-1"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 -top-3 right-1 z-30"></span>
+        <span className="relative flex h-3 w-3">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 -top-3 right-1"></span>
+        <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500 -top-3 right-1 z-30"></span>
       </span>
       )}
     </div>

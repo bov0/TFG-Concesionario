@@ -90,13 +90,11 @@ export const CompraCoches = () => {
       try {
         await axios.post(urlImg, dataImg);
       } catch (error) {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
         console.error("Error al añadir imagen:", error.message);
       }
       console.log("Coche añadido con éxito");
       navigate(`/coche/${response.data.id}`);
     } catch (error) {
-      // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
       console.error("Error al añadir usuario:", error.message);
     }
   }

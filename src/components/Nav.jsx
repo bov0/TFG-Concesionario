@@ -35,34 +35,34 @@ const Nav = () => {
       </NavbarContent>
       <NavbarContent className="hidden md:flex gap-4" justify="center">
         <NavbarItem>
-          <NavLink color="foreground" to="/NuestrosCoches">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/NuestrosCoches">
             Nuestros Coches
           </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <NavLink color="foreground" to="/CompraCoche">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/CompraCoche">
             Compramos tu coche
           </NavLink>
         </NavbarItem>
         <NavbarItem>
-          <NavLink color="foreground" to="/TrabajaConNosotros">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/TrabajaConNosotros">
             Coches de Ocasion
           </NavLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem>
-          <NavLink color="foreground" to="/NuestrosCoches">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/NuestrosCoches">
             Nuestros Coches
           </NavLink>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <NavLink color="foreground" to="/CompraCoche">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/CompraCoche">
             Compramos tu coche
           </NavLink>
         </NavbarMenuItem>
         <NavbarMenuItem>
-          <NavLink color="foreground" to="/TrabajaConNosotros">
+          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/TrabajaConNosotros">
             Coches de Ocasion
           </NavLink>
         </NavbarMenuItem>

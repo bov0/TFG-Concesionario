@@ -19,19 +19,16 @@ export const Login = () => {
             if (response.status === 200) {
                 const usuario = response.data;
                 if (usuario && usuario.contrasena === password) {
-                    // La contraseña es correcta, puedes redirigir al usuario a otra página
                     console.log('Inicio de sesión exitoso');
                     const id = response.data.id;
                     const userData = { id, nombre };
                     login(userData);
                     navigate('/'); // Redirige al usuario a la página de inicio
                 } else {
-                    // La contraseña es incorrecta, muestra un mensaje de error al usuario
                     setError("La contraseña ingresada es incorrecta");
                     setHayError(true);
                 }
             } else {
-                // El inicio de sesión falló, puedes mostrar un mensaje de error al usuario aquí
                 setError("Error al iniciar sesión");
                 setHayError(true);
             }

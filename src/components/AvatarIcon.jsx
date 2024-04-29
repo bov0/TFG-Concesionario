@@ -11,7 +11,7 @@ const AvatarIcon = () => {
   return (
     <Dropdown className='w-fit flex justify-center'>
       <DropdownTrigger className='w-fit flex justify-center'>
-          <FontAwesomeIcon icon={faUser} className='h-5'/>
+          <FontAwesomeIcon icon={faUser} className="h-5 hover:text-purple-600 font-semibold duration-300"/>
       </DropdownTrigger>
       <DropdownMenu aria-label="User Menu">
         {isAuthenticated ? (

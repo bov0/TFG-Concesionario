@@ -7,6 +7,7 @@ export const CarritoProvider = ({ children }) => {
 
   useEffect(() => {
     console.log("Carrito actualizado:", carrito);
+    console.log(carrito.length);
   }, [carrito]);
 
   return (

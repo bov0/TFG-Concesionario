@@ -58,7 +58,13 @@ const DetalleCoche = () => {
   
     const nuevoCoche = {
       id: coche.id,
-      nombre: `${coche.marcaNombre}-${coche.modeloNombre}`,
+      marcaNombre: coche.marcaNombre,
+      modeloNombre: coche.modeloNombre,
+      anio : coche.anio,
+      cajaCambios: coche.cajaCambios,
+      combustible: coche.combustible,
+      km : coche.km,
+      distAmbiental: coche.distAmbiental,
       precio: coche.precio
     };
   

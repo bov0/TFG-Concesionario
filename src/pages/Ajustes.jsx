@@ -242,7 +242,7 @@ export const Ajustes = () => {
           </div>
           <Button
             type="submit"
-            className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg"
+            className="bg-lime-200 font-bold shadow-xl"
           >
             Enviar
           </Button>
@@ -311,7 +311,7 @@ export const Ajustes = () => {
           </div>
           <Button
             type="submit"
-            className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg"
+            className="bg-lime-200 font-bold shadow-xl"
           >
             Enviar
           </Button>

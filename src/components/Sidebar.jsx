@@ -189,7 +189,7 @@ export const Sidebar = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative h-fit">
       <button
       onClick={() => {
         const sidebar = document.getElementById('sidebar-multi-level-sidebar');
