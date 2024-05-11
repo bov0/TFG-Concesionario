@@ -44,18 +44,30 @@ export const CarritoCompra = () => {
     dataCocheVendido.append("vendedor_id", user.id);
     try {
       const addToVentas = await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);
-      console.log("Añadido a ventas");     
+      console.log("Añadido a ventas");  
+      try {
+        const deleteImgs = await axios.delete(`http://127.0.0.1:8000/imagenes-coche/byCar/${cocheDetails.id}`);
+        console.log("Imagenes eliminadas");        
+      } catch (error) {          
+        console.error("Error al elimnar imagenes del coche con id: " + cocheDetails.id);
+      }  
+      try {
+        const deleteFromCoches = await axios.delete(`http://127.0.0.1:8000/coches/${cocheDetails.id}`);
+        console.log("Eliminado de coches");                
+      } catch (error) {
+        console.error("Error al eliminar el coche con id: " + coche.id);
+      }      
+      try {
+        const addToCochesVendidos = await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
+        eliminarDelCarrito(index);
+        console.log("Añadido a cochesVendidos");
+      } catch (error) {          
+        console.error("Error al confirmar la compra del coche con id: " + cocheDetails.id);
+      }   
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + coche.id + " y comprador con id: " + user.id, error);
       
-    }
-    try {
-      const addToCochesVendidos = await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
-      eliminarDelCarrito(index);
-      console.log("Añadido a cochesVendidos");
-    } catch (error) {
-      console.error("Error al confirmar la compra del coche con id: " + cocheDetails.id);
-    }
+    }    
   };
 
   const eliminarDelCarrito = (index) => {
@@ -63,7 +75,7 @@ export const CarritoCompra = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center mx-auto md:w-8/12 h-full'>
+    <div className='flex flex-col justify-center items-center mx-auto md:w-8/12 h-full'> 
       {carrito.length === 0 ? (
         <p className="w-8/12 text-center h-[95vh] flex flex-col justify-center font-semibold text-3xl text-default-500">Todavia no has añadido nada al carrito.</p>
       ) : (
