@@ -247,7 +247,7 @@ export const Sidebar = () => {
 
             <Parametro nombre="Color" tipo="Checkbox" opciones={opcionesColor} onChange={ManejoCambioColor} />
 
-            <Button onClick={resetearFiltros}>Restablecer filtros</Button>
+            <Button className="bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg" onClick={resetearFiltros}>Restablecer filtros</Button>
           </ul>
         </div>
       </aside>

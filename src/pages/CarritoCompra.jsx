@@ -43,11 +43,10 @@ export const CarritoCompra = () => {
     dataCocheVendido.append("color", cocheDetails.color);
     dataCocheVendido.append("vendedor_id", user.id);
     try {
-      const addToVentas = await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);
+      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas); // Llamada a la API sin asignar el resultado
       console.log("Añadido a ventas");     
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + coche.id + " y comprador con id: " + user.id, error);
-      
     }
     try {
       const addToCochesVendidos = await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
@@ -63,11 +62,11 @@ export const CarritoCompra = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center mx-auto md:w-8/12 h-full'>
+    <div className='flex flex-col justify-center items-center mx-auto md:w-8/12 h-dvh'>
       {carrito.length === 0 ? (
         <p className="w-8/12 text-center h-[95vh] flex flex-col justify-center font-semibold text-3xl text-default-500">Todavia no has añadido nada al carrito.</p>
       ) : (
-        <Table aria-label="Tabla de Carrito" className="w-8/12 text-center h-[95vh] flex flex-col justify-center">
+        <Table aria-label="Tabla de Carrito" className="w-8/12 text-center h-dvh flex flex-col justify-center">
           <TableHeader>
             <TableColumn className='text-center'>Nombre</TableColumn>
             <TableColumn className='text-center'>Detalles</TableColumn>

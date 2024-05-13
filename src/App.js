@@ -13,6 +13,7 @@ import { FiltrosProvider } from './components/FiltrosContext';
 import { CarritoProvider } from './components/carritoContext';
 import DetalleCoche from './pages/DetalleCoche';
 import { CarritoCompra } from './pages/CarritoCompra';
+import { ComprasVentas } from './pages/ComprasVentas';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/Ajustes' element={<Ajustes />} />
                 <Route path="/Coche/:id" element={<DetalleCoche />} />
                 <Route path='/Carrito' element={<CarritoCompra/>}></Route>
+                <Route path='/ComprasVentas' element={<ComprasVentas/>}></Route>
               </Routes>
             </Router>
           </CarritoProvider>

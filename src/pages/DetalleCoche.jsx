@@ -13,6 +13,7 @@ const DetalleCoche = () => {
   const { isAuthenticated } = useAuth();
   const { setCarrito } = useContext(CarritoContext);
   const { carrito } = useCarrito();
+  const [mensaje,setMensaje] = useState(null);
 
   useEffect(() => {
     const fetchCocheData = async () => {
@@ -69,6 +70,7 @@ const DetalleCoche = () => {
     };
   
     setCarrito(prevCarrito => [...prevCarrito, nuevoCoche]);
+    setMensaje('Vehiculo añadido al carrito')
     } else {
       console.log("Tienes que iniciar sesion")
     }
@@ -77,7 +79,7 @@ const DetalleCoche = () => {
 
   if (!coche) {
     return (
-      <div className="flex justify-center items-center h-screen w-screen flex-col md:flex-row">
+      <div className="flex justify-center items-center h-dvh w-screen flex-col md:flex-row">
         <div className="flex justify-center flex-col items-center space-y-3">
           <Skeleton className="rounded-xl aspect-video w-96 md:w-[50vw] shadow-xl">
             <div className="rounded-xl bg-default-300 h-full w-full"></div>
@@ -106,7 +108,7 @@ const DetalleCoche = () => {
   }
 
   return (
-    <div className="flex justify-center items-center mx-auto h-screen gap-3 md:gap-5 flex-col md:flex-row">
+    <div className="flex justify-center items-center mx-auto h-dvh gap-3 md:gap-5 flex-col md:flex-row">
       <div>
         <img src={coche.imagenURL} className="rounded-xl aspect-video w-96 md:w-[50vw] shadow-xl" alt={`Imagen de ${coche.modeloNombre}`} />
         <section className="flex md:justify-around align-middle flex-wrap flex-col md:flex-row mt-2 text-default-500 md:w-[50vw] bg-default-50 p-5 rounded-xl shadow-xl">
@@ -130,6 +132,11 @@ const DetalleCoche = () => {
           <h1 className="text-xl font-semibold">{coche.vendedorNombre}</h1>
         </div>
       </aside>
+      {mensaje && (
+        <p className="bg-lime-200 font-semibold p-4 rounded-xl absolute bottom-20">
+          {mensaje}
+        </p>
+      )}
     </div>
   );
 };

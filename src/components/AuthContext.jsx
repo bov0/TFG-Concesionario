@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
@@ -9,20 +9,28 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    console.log('isAuthenticated cambió:', isAuthenticated);
-  }, [isAuthenticated]); // Ejecuta este efecto cada vez que isAuthenticated cambie
+  const fetchUserAvatar = async (userId) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/usuarios/imagen/${userId}`,
+        { responseType: 'arraybuffer' }
+      );
+      const blob = new Blob([response.data], { type: 'image/png' });
+      const avatarURL = URL.createObjectURL(blob);
+      return avatarURL;
+    } catch (error) {
+      console.error('Error al obtener la imagen del usuario:', error);
+      return null;
+    }
+  };
 
   const login = async (userData) => {
     try {
       const response = await axios.get(`http://127.0.0.1:8000/usuarios/${userData.id}`);
-      
       if (response.status === 200) {
         const usuarioCompleto = response.data;
-
-        console.log(usuarioCompleto);
-        
-        setUser(usuarioCompleto);
+        const avatarURL = await fetchUserAvatar(userData.id); // Obtén la imagen del usuario
+        setUser({ ...usuarioCompleto, avatarURL }); // Agrega la URL de la imagen al objeto user
         setIsAuthenticated(true);
         console.log('Inicio de sesión exitoso dentro de AuthContext');
       } else {
@@ -34,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    console.log(user.nombre + " cerrando sesion...")
+    console.log((user?.nombre || 'Usuario') + " cerrando sesión...");
     setUser(null);
     setIsAuthenticated(false);
   };
