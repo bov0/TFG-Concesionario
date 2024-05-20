@@ -1,25 +1,44 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
-import { Button,Table,TableHeader,TableColumn,TableBody,TableRow,TableCell } from '@nextui-org/react';
+import { Button, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
 import axios from 'axios';
+import { useAuth } from '../components/AuthContext';
 
 export const ComprasVentas = () => {
     const [compras, setCompras] = useState([]);
     const [ventas, setVentas] = useState([]);
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchCocheData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/coches-vendidos/15');
-                setVentas(response.data);
+                const cochesVendidos = await axios.get(`http://localhost:8000/coches-vendidos/${user.id}`);
+                
+                const ventasConDetalles = await Promise.all(cochesVendidos.data.map(async (coche) => {
+                    try {
+                        const [marcaResult, modeloResult] = await Promise.all([
+                            axios.get(`http://127.0.0.1:8000/marcas-coche/${coche.marca_id}`),
+                            axios.get(`http://127.0.0.1:8000/modelos/${coche.modelo}`)
+                        ]);
+            
+                        const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
+                        const modeloNombre = modeloResult.data.nombre || 'Error modelo';
+
+                        return { ...coche, marcaNombre, modeloNombre };
+                    } catch (error) {
+                        console.error("Error fetching marca or modelo data", error);
+                        return { ...coche, marcaNombre: 'Error marca', modeloNombre: 'Error modelo' };
+                    }
+                }));
+
+                setVentas(ventasConDetalles);
             } catch (error) {
                 console.error("Error fetching ventas data", error);
             }
         };
 
         fetchCocheData();
-    }, []);
+    }, [user.id]);
 
     return (
         <div className='h-dvh flex flex-col justify-center items-center mx-auto md:w-8/12 gap-5'>
@@ -29,7 +48,7 @@ export const ComprasVentas = () => {
                     <p>Hay compras</p>
                 ) : (
                     <div className='flex flex-col justify-center items-center gap-5'>
-                        <p>No hay compras aun.</p>
+                        <p>No hay compras aún.</p>
                         <Button className='bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg'>
                             <NavLink to="/NuestrosCoches">
                                 Empieza a comprar
@@ -42,17 +61,17 @@ export const ComprasVentas = () => {
                 <h2 className='text-center text-3xl font-semibold mb-5'>Ventas</h2>
                 {ventas.length > 0 ? (
                     <div>
-                        <Table>
+                        <Table className='text-center'>
                             <TableHeader>
-                                <TableColumn>Marca</TableColumn>
-                                <TableColumn>Modelo</TableColumn>
-                                <TableColumn>Precio</TableColumn>
+                                <TableColumn className='text-center'>Marca</TableColumn>
+                                <TableColumn className='text-center'>Modelo</TableColumn>
+                                <TableColumn className='text-center'>Precio</TableColumn>
                             </TableHeader>
                             <TableBody>
                             {ventas.map((venta) => (
                                 <TableRow key={venta.id}>
-                                    <TableCell>{venta.marca_id}</TableCell>
-                                    <TableCell>{venta.modelo}</TableCell>
+                                    <TableCell>{venta.marcaNombre}</TableCell>
+                                    <TableCell>{venta.modeloNombre}</TableCell>
                                     <TableCell>{venta.precio}</TableCell>
                                 </TableRow>
                             ))}
@@ -61,10 +80,10 @@ export const ComprasVentas = () => {
                     </div>
                 ) : (
                     <div className='flex flex-col justify-center items-center gap-5'>
-                        <p>No hay ventas aun.</p>
+                        <p>No hay ventas aún.</p>
                         <Button className='bg-gradient-to-tr from-pink-500 to-purple-800 text-white font-bold shadow-lg'>
                             <NavLink to="/CompraCoche">
-                                Publica tu primer vehiculo
+                                Publica tu primer vehículo
                             </NavLink>
                         </Button>
                     </div>
@@ -72,4 +91,4 @@ export const ComprasVentas = () => {
             </div>
         </div>
     );
-}
+};

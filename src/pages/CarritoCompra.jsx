@@ -43,7 +43,7 @@ export const CarritoCompra = () => {
     dataCocheVendido.append("color", cocheDetails.color);
     dataCocheVendido.append("vendedor_id", user.id);
     try {
-      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas); // Llamada a la API sin asignar el resultado
+      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);
       console.log("Añadido a ventas");     
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + coche.id + " y comprador con id: " + user.id, error);
