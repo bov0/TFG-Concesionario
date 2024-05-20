@@ -29,7 +29,7 @@ const AvatarIcon = () => {
           <DropdownItem textValue='Registrarse'><Link to="/registro">Registrarse</Link></DropdownItem>
         )}
         {isAuthenticated && (
-          <DropdownItem textValue='Cerrar sesion' className="text-danger" onClick={logout} color="danger">Cerrar Sesión</DropdownItem>
+          <DropdownItem textValue='Cerrar sesion' className="text-danger" onClick={logout} color="danger"><Link to="/">Cerrar Sesión</Link></DropdownItem>
         )}
       </DropdownMenu>
     </Dropdown>
