@@ -10,17 +10,56 @@ export const ComprasVentas = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        const fetchCocheData = async () => {
+        const fetchCochesCompradosData = async (userId) => {
+            try {
+                // Obtener los coches comprados
+                const comprasResponse = await axios.get(`http://localhost:8000/compras/${userId}`);
+                const cochesComprados = comprasResponse.data;
+
+                // Obtener detalles de cada coche
+                const cocheDetailsPromises = cochesComprados.map(async (compra) => {
+                    try {
+                        const cocheResponse = await axios.get(`http://localhost:8000/cochesVendidos/${compra.coche_id}`);
+                        const coche = cocheResponse.data;
+
+                        const [marcaResult, modeloResult] = await Promise.all([
+                            axios.get(`http://127.0.0.1:8000/marcas-coche/${coche.marca_id}`),
+                            axios.get(`http://127.0.0.1:8000/modelos/${coche.modelo}`)
+                        ]);
+
+                        const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
+                        const modeloNombre = modeloResult.data.nombre || 'Error modelo';
+
+                        return {
+                            ...compra,
+                            cocheDetails: { ...coche, marcaNombre, modeloNombre }
+                        };
+                    } catch (error) {
+                        console.error(`Error fetching coche data for coche_id ${compra.coche_id}`, error);
+                        return {
+                            ...compra,
+                            cocheDetails: null
+                        };
+                    }
+                });
+
+                const cochesCompradosConDetalles = await Promise.all(cocheDetailsPromises);
+                setCompras(cochesCompradosConDetalles);
+            } catch (error) {
+                console.error("Error fetching compras data", error);
+            }
+        };
+
+        const fetchCochesVendidosData = async () => {
             try {
                 const cochesVendidos = await axios.get(`http://localhost:8000/coches-vendidos/${user.id}`);
-                
                 const ventasConDetalles = await Promise.all(cochesVendidos.data.map(async (coche) => {
                     try {
                         const [marcaResult, modeloResult] = await Promise.all([
                             axios.get(`http://127.0.0.1:8000/marcas-coche/${coche.marca_id}`),
                             axios.get(`http://127.0.0.1:8000/modelos/${coche.modelo}`)
                         ]);
-            
+
                         const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
                         const modeloNombre = modeloResult.data.nombre || 'Error modelo';
 
@@ -37,7 +76,8 @@ export const ComprasVentas = () => {
             }
         };
 
-        fetchCocheData();
+        fetchCochesCompradosData(user.id);
+        fetchCochesVendidosData();
     }, [user.id]);
 
     return (
@@ -45,7 +85,24 @@ export const ComprasVentas = () => {
             <div className='p-5 backdrop-blur-3xl bg-white/50 rounded-xl w-full'>
                 <h2 className='text-center text-3xl font-semibold mb-5'>Compras</h2>
                 {compras.length > 0 ? (
-                    <p>Hay compras</p>
+                    <div>
+                        <Table className='text-center'>
+                            <TableHeader>
+                                <TableColumn className='text-center'>Marca</TableColumn>
+                                <TableColumn className='text-center'>Modelo</TableColumn>
+                                <TableColumn className='text-center'>Precio</TableColumn>
+                            </TableHeader>
+                            <TableBody>
+                                {compras.map((compra) => (
+                                    <TableRow key={compra.id}>
+                                        <TableCell>{compra.cocheDetails.marcaNombre}</TableCell>
+                                        <TableCell>{compra.cocheDetails.modeloNombre}</TableCell>
+                                        <TableCell>{compra.cocheDetails.precio}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
                 ) : (
                     <div className='flex flex-col justify-center items-center gap-5'>
                         <p>No hay compras aún.</p>
@@ -68,13 +125,13 @@ export const ComprasVentas = () => {
                                 <TableColumn className='text-center'>Precio</TableColumn>
                             </TableHeader>
                             <TableBody>
-                            {ventas.map((venta) => (
-                                <TableRow key={venta.id}>
-                                    <TableCell>{venta.marcaNombre}</TableCell>
-                                    <TableCell>{venta.modeloNombre}</TableCell>
-                                    <TableCell>{venta.precio}</TableCell>
-                                </TableRow>
-                            ))}
+                                {ventas.map((venta) => (
+                                    <TableRow key={venta.id}>
+                                        <TableCell>{venta.marcaNombre}</TableCell>
+                                        <TableCell>{venta.modeloNombre}</TableCell>
+                                        <TableCell>{venta.precio}</TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </div>
