@@ -10,10 +10,10 @@ const DetalleCoche = () => {
 
   const [coche, setCoche] = useState(null);
   const { id: cocheId } = useParams();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const { setCarrito } = useContext(CarritoContext);
   const { carrito } = useCarrito();
-  const [mensaje,setMensaje] = useState(null);
+  const [mensaje, setMensaje] = useState(null);
 
   useEffect(() => {
     const fetchCocheData = async () => {
@@ -50,32 +50,38 @@ const DetalleCoche = () => {
   const handleAgregarAlCarrito = () => {
 
     if (isAuthenticated) {
+
       const cocheExistente = carrito.find(item => item.id === coche.id);
-  
-    if (cocheExistente) {
-      console.log("El coche ya está en el carrito.");
-      return;
-    }
-  
-    const nuevoCoche = {
-      id: coche.id,
-      marcaNombre: coche.marcaNombre,
-      modeloNombre: coche.modeloNombre,
-      anio : coche.anio,
-      cajaCambios: coche.cajaCambios,
-      combustible: coche.combustible,
-      km : coche.km,
-      distAmbiental: coche.distAmbiental,
-      precio: coche.precio
-    };
-  
-    setCarrito(prevCarrito => [...prevCarrito, nuevoCoche]);
-    setMensaje('Vehiculo añadido al carrito')
+
+      if (cocheExistente) {
+        console.log("El coche ya está en el carrito.");
+        return;
+      }
+
+      if (user.id == coche.vendedor_id) {
+        setMensaje('No puedes comprarte a ti mismo el coche')
+
+      } else {
+        const nuevoCoche = {
+          id: coche.id,
+          marcaNombre: coche.marcaNombre,
+          modeloNombre: coche.modeloNombre,
+          anio: coche.anio,
+          cajaCambios: coche.cajaCambios,
+          combustible: coche.combustible,
+          km: coche.km,
+          distAmbiental: coche.distAmbiental,
+          precio: coche.precio
+        };
+
+        setCarrito(prevCarrito => [...prevCarrito, nuevoCoche]);
+        setMensaje('Vehiculo añadido al carrito')
+      }
     } else {
       console.log("Tienes que iniciar sesion")
     }
   };
-  
+
 
   if (!coche) {
     return (
