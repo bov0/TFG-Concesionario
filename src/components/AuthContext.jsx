@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`http://127.0.0.1:8000/usuarios/${userData.id}`);
       if (response.status === 200) {
         const usuarioCompleto = response.data;
-        const avatarURL = await fetchUserAvatar(userData.id); // Obtén la imagen del usuario
-        setUser({ ...usuarioCompleto, avatarURL }); // Agrega la URL de la imagen al objeto user
+        const avatarURL = await fetchUserAvatar(userData.id);
+        setUser({ ...usuarioCompleto, avatarURL }); 
         setIsAuthenticated(true);
         console.log('Inicio de sesión exitoso dentro de AuthContext');
       } else {
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, fetchUserAvatar, setUser }}>
       {children}
     </AuthContext.Provider>
   );

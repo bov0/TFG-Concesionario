@@ -3,10 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { useAuth } from './AuthContext';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AvatarIcon = () => {
   const { isAuthenticated, logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   return (
     <Dropdown className='w-fit flex justify-center'>
@@ -19,17 +24,17 @@ const AvatarIcon = () => {
       </DropdownTrigger>
       <DropdownMenu aria-label="User Menu">
         {isAuthenticated ? (
-          <DropdownItem textValue='Mis compras'><Link to="/ComprasVentas">Mis compras/Ventas</Link></DropdownItem>
+          <DropdownItem textValue='Mis compras' onClick={() => handleNavigation('/ComprasVentas')}>Mis compras/Ventas</DropdownItem>
         ) : (
-          <DropdownItem textValue='Iniciar sesion'><Link to="/login">Iniciar Sesión</Link></DropdownItem>
+          <DropdownItem textValue='Iniciar sesion' onClick={() => handleNavigation('/login')}>Iniciar Sesión</DropdownItem>
         )}
         {isAuthenticated ? (
-          <DropdownItem textValue='Ajustes perfil' onClick={() => console.log("Ajustes de perfil")}><Link to="/ajustes">Ajustes de perfil</Link></DropdownItem>
+          <DropdownItem textValue='Ajustes perfil' onClick={() => handleNavigation('/ajustes')}>Ajustes de perfil</DropdownItem>
         ) : (
-          <DropdownItem textValue='Registrarse'><Link to="/registro">Registrarse</Link></DropdownItem>
+          <DropdownItem textValue='Registrarse' onClick={() => handleNavigation('/registro')}>Registrarse</DropdownItem>
         )}
         {isAuthenticated && (
-          <DropdownItem textValue='Cerrar sesion' className="text-danger" onClick={logout} color="danger"><Link to="/">Cerrar Sesión</Link></DropdownItem>
+          <DropdownItem textValue='Cerrar sesion' className="text-danger" onClick={() => { logout(); handleNavigation('/'); }} color="danger">Cerrar Sesión</DropdownItem>
         )}
       </DropdownMenu>
     </Dropdown>
