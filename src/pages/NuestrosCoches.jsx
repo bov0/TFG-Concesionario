@@ -4,15 +4,18 @@ import { Sidebar } from "../components/Sidebar";
 import axios from "axios";
 import { FiltrosContext } from "../components/FiltrosContext";
 import { Skeleton } from "@nextui-org/react";
+import { Pagination } from "@nextui-org/react";
 
 const NuestrosCoches = () => {
   const { filtros } = useContext(FiltrosContext);
   const [coches, setCoches] = useState([]);
   const [cargandoCoches, setCargandoCoches] = useState(true);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const cochesPorPagina = 8;
 
   const fetchData = useCallback(async () => {
     try {
-      setCargandoCoches(true)
+      setCargandoCoches(true);
       const cochesResult = await axios.get('http://127.0.0.1:8000/coches');
       const cochesConImagenes = await Promise.all(cochesResult.data.map(async (coche) => {
         try {
@@ -71,22 +74,40 @@ const NuestrosCoches = () => {
 
   useEffect(() => {
     fetchData();
-  }, [filtros, fetchData]); 
+  }, [filtros, fetchData]);
+
+  const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
       <Sidebar />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-4 gap-4 justify-items-center w-full">
+      <div className="flex flex-col justify-items-center items-center w-full p-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-items-center w-full">
         {cargandoCoches ? (
-          Array.from({ length: 15 }).map((_, index) => (
+          Array.from({ length: 8 }).map((_, index) => (
             <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
           ))
-        ) :
-          (
-            coches.map((coche) => (
-              <Tarjeta key={coche.id} {...coche} />
-            ))
-          )}
+        ) : (
+          <>
+            {coches
+              .slice((paginaActual - 1) * cochesPorPagina, paginaActual * cochesPorPagina)
+              .map((coche) => (
+                <Tarjeta key={coche.id} {...coche} />
+              ))}
+          </>
+        )}
+      </div>
+      <div className="flex justify-center w-full">
+              <Pagination
+                total={Math.ceil(coches.length / cochesPorPagina)}
+                initialPage={paginaActual}
+                onChange={cambiarPagina}
+                classNames={{
+                  cursor:
+                    "shadow-2xl bg-lime-200 text-black font-bold",
+                }}
+              />
+            </div>
       </div>
     </div>
   );

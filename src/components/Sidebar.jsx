@@ -37,29 +37,28 @@ export const Sidebar = () => {
     try {
       const NombreMarcaSeleccionada = event.target.value;
       console.log(NombreMarcaSeleccionada);
-  
+
       if (NombreMarcaSeleccionada === "") {
-        // Si la marca seleccionada es una cadena vacía, establecer los modelos como un array vacío
         setOpcionesModelos([]);
         setFiltros(prevState => ({ ...prevState, Marca: "" }));
         console.log("Marca seleccionada es una cadena vacía");
         return;
       }
-  
+
       const marcaSeleccionada = opcionesMarcas.find(marca => marca.nombreMarca === NombreMarcaSeleccionada);
       if (!marcaSeleccionada) {
         console.error("No se encontró la marca seleccionada:", NombreMarcaSeleccionada);
         return;
       }
-  
+
       const response = await axios.get(`http://127.0.0.1:8000/modelosMarca/${marcaSeleccionada.id}`);
       setOpcionesModelos(response.data.map((modelo) => modelo.nombre));
-  
+
       setFiltros(prevState => ({ ...prevState, Marca: NombreMarcaSeleccionada }));
     } catch (error) {
       console.error("Error fetching modelos:", error);
     }
-  };  
+  };
 
   const ManejoCambioModelo = async (event) => {
     try {
@@ -101,10 +100,9 @@ export const Sidebar = () => {
 
     setFiltros(prevState => {
       const cajaCambioActualizada = prevState.cajaCambio.includes(cajaCambiosSeleccionada)
-        ? prevState.cajaCambio.filter(item => item !== cajaCambiosSeleccionada) // Eliminar el tipo de caja de cambios
-        : [...prevState.cajaCambio, cajaCambiosSeleccionada]; // Agregar el tipo de caja de cambios si no está presente
+        ? prevState.cajaCambio.filter(item => item !== cajaCambiosSeleccionada)
+        : [...prevState.cajaCambio, cajaCambiosSeleccionada];
 
-      // Devolver un nuevo objeto de estado con el array actualizado
       return { ...prevState, cajaCambio: cajaCambioActualizada };
     });
   };
@@ -115,10 +113,9 @@ export const Sidebar = () => {
 
     setFiltros(prevState => {
       const combustibleActualizado = prevState.combustible.includes(combustibleSeleccionado)
-        ? prevState.combustible.filter(item => item !== combustibleSeleccionado) // Eliminar el combustible
-        : [...prevState.combustible, combustibleSeleccionado]; // Agregar el combustible si no está presente
+        ? prevState.combustible.filter(item => item !== combustibleSeleccionado)
+        : [...prevState.combustible, combustibleSeleccionado];
 
-      // Devolver un nuevo objeto de estado con el array actualizado
       return { ...prevState, combustible: combustibleActualizado };
     });
   };
@@ -140,10 +137,9 @@ export const Sidebar = () => {
 
     setFiltros(prevState => {
       const distAmbientalActualizado = prevState.distAmbiental.includes(DistAmbientalSeleccionada)
-        ? prevState.distAmbiental.filter(item => item !== DistAmbientalSeleccionada) // Eliminar la opción
-        : [...prevState.distAmbiental, DistAmbientalSeleccionada]; // Agregar la opción si no está presente
+        ? prevState.distAmbiental.filter(item => item !== DistAmbientalSeleccionada)
+        : [...prevState.distAmbiental, DistAmbientalSeleccionada];
 
-      // Devolver un nuevo objeto de estado con el array actualizado
       return { ...prevState, distAmbiental: distAmbientalActualizado };
     });
   };
@@ -153,8 +149,8 @@ export const Sidebar = () => {
 
     setFiltros(prevState => {
       const colorActualizado = prevState.color.includes(colorSeleccionado)
-        ? prevState.color.filter(item => item !== colorSeleccionado) // Eliminar el color
-        : [...prevState.color, colorSeleccionado]; // Agregar el color si no está presente
+        ? prevState.color.filter(item => item !== colorSeleccionado)
+        : [...prevState.color, colorSeleccionado];
 
       return { ...prevState, color: colorActualizado };
     });
@@ -189,39 +185,40 @@ export const Sidebar = () => {
   }, []);
 
   return (
-    <div className="relative h-fit">
-      <button
-      onClick={() => {
-        const sidebar = document.getElementById('sidebar-multi-level-sidebar');
-        sidebar.classList.toggle('-translate-x-full');
-        const boton = document.getElementById('boton');
-        const isSidebarOpen = sidebar.classList.contains('-translate-x-full');
-        boton.style.left = isSidebarOpen ? '2px' : '175px';
-      }}      
-      aria-label="Open sidebar"
-      id="boton"
-      className="absolute top-2 left-[175px] z-30 inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg lg:hidden bg-default-100 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 shadow-xl transition-all duration-300 ease-in-out"
-    >
-      <span className="sr-only">Open sidebar</span>
-      <svg
-        className="w-6 h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          clipRule="evenodd"
-          fillRule="evenodd"
-          d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-        ></path>
-      </svg>
-    </button>
+    <div className="h-dvh">
+
       <aside
         id="sidebar-multi-level-sidebar"
-        className=" w-64 h-screen transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
+        className=" w-fit p-4 h-dvh transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
         aria-label="Sidebar"
       >
+        <button
+          onClick={() => {
+            const sidebar = document.getElementById('sidebar-multi-level-sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+            const boton = document.getElementById('boton');
+            const isSidebarOpen = sidebar.classList.contains('-translate-x-full');
+            boton.style.left = isSidebarOpen ? '250px' : '175px';
+          }}
+          aria-label="Open sidebar"
+          id="boton"
+          className="absolute top-2 left-[175px] z-30 inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg lg:hidden bg-default-100 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 shadow-xl transition-all duration-300 ease-in-out"
+        >
+          <span className="sr-only">Open sidebar</span>
+          <svg
+            className="w-6 h-6"
+            aria-hidden="true"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clipRule="evenodd"
+              fillRule="evenodd"
+              d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+            ></path>
+          </svg>
+        </button>
         <div className="h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
           <ul className="space-y-2 pt-10 font-medium">
 

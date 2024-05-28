@@ -19,7 +19,6 @@ const Nav = () => {
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
       open={isMenuOpen}
-      shouldHideOnScroll
       className="uppercase bg-default-50 shadow-lg"
     >
       <NavbarContent justify="start">
