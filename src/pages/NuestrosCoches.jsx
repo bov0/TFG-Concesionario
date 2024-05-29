@@ -82,32 +82,32 @@ const NuestrosCoches = () => {
     <div className="flex h-full">
       <Sidebar />
       <div className="flex flex-col justify-items-center items-center w-full p-4">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-items-center w-full">
-        {cargandoCoches ? (
-          Array.from({ length: 8 }).map((_, index) => (
-            <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
-          ))
-        ) : (
-          <>
-            {coches
-              .slice((paginaActual - 1) * cochesPorPagina, paginaActual * cochesPorPagina)
-              .map((coche) => (
-                <Tarjeta key={coche.id} {...coche} />
-              ))}
-          </>
-        )}
-      </div>
-      <div className="flex justify-center w-full">
-              <Pagination
-                total={Math.ceil(coches.length / cochesPorPagina)}
-                initialPage={paginaActual}
-                onChange={cambiarPagina}
-                classNames={{
-                  cursor:
-                    "shadow-2xl bg-lime-200 text-black font-bold",
-                }}
-              />
-            </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-center items-center w-full">
+          {cargandoCoches ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
+            ))
+          ) : (
+            <>
+              {coches
+                .slice((paginaActual - 1) * cochesPorPagina, paginaActual * cochesPorPagina)
+                .map((coche) => (
+                  <Tarjeta key={coche.id} {...coche} />
+                ))}
+            </>
+          )}
+        </div>
+        <div className="flex justify-center w-full absolute bottom-20">
+          <Pagination
+            total={Math.ceil(coches.length / cochesPorPagina)}
+            initialPage={paginaActual}
+            onChange={cambiarPagina}
+            classNames={{
+              cursor:
+                "shadow-2xl bg-lime-200 text-black font-bold",
+            }}
+          />
+        </div>
       </div>
     </div>
   );

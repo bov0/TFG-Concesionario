@@ -189,7 +189,7 @@ export const Sidebar = () => {
 
       <aside
         id="sidebar-multi-level-sidebar"
-        className=" w-fit p-4 h-dvh transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
+        className=" w-fit p-4 h-full transition-transform lg:translate-x-0 lg:relative fixed z-20 bg-default-50 shadow-xl"
         aria-label="Sidebar"
       >
         <button

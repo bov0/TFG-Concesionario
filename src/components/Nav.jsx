@@ -43,11 +43,6 @@ const Nav = () => {
             Compramos tu coche
           </NavLink>
         </NavbarItem>
-        <NavbarItem>
-          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/TrabajaConNosotros">
-            Coches de Ocasion
-          </NavLink>
-        </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem>
@@ -58,11 +53,6 @@ const Nav = () => {
         <NavbarMenuItem>
           <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/CompraCoche">
             Compramos tu coche
-          </NavLink>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <NavLink color="foreground" className="hover:text-purple-600 font-semibold duration-300" to="/TrabajaConNosotros">
-            Coches de Ocasion
           </NavLink>
         </NavbarMenuItem>
       </NavbarMenu>
