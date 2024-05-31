@@ -19,7 +19,6 @@ export const Login = () => {
             if (response.status === 200) {
                 const usuario = response.data;
                 if (usuario && usuario.contrasena === password) {
-                    console.log('Inicio de sesión exitoso');
                     const id = response.data.id;
                     const userData = { id, nombre };
                     login(userData);
