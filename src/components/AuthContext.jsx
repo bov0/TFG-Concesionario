@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         const avatarURL = await fetchUserAvatar(userData.id);
         setUser({ ...usuarioCompleto, avatarURL }); 
         setIsAuthenticated(true);
-        console.log('Inicio de sesión exitoso dentro de AuthContext');
+        console.log('Inicio de sesión exitoso dentro de AuthContext, Prueba.');
       } else {
         console.error('Error al iniciar sesión');
       }
