@@ -16,13 +16,13 @@ const NuestrosCoches = () => {
   const fetchData = useCallback(async () => {
     try {
       setCargandoCoches(true);
-      const cochesResult = await axios.get('http://127.0.0.1:8000/coches');
+      const cochesResult = await axios.get('https://tfg-backend-4nkyb73jha-nw.a.run.app/coches');
       const cochesConImagenes = await Promise.all(cochesResult.data.map(async (coche) => {
         try {
           const [marcaResult, modeloResult, imagenResult] = await Promise.all([
-            axios.get(`http://127.0.0.1:8000/marcas-coche/${coche.marca_id}`),
-            axios.get(`http://127.0.0.1:8000/modelos/${coche.modelo}`),
-            axios.get(`http://127.0.0.1:8000/imagenes-coche/imagen/${coche.id}`, { responseType: 'arraybuffer' })
+            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/${coche.marca_id}`),
+            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/${coche.modelo}`),
+            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/imagenes-coche/imagen/${coche.id}`, { responseType: 'arraybuffer' })
           ]);
 
           const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
