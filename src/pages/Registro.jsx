@@ -35,7 +35,7 @@ export const Registro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = "http://127.0.0.1:8000/usuarios";
+    const url = "https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios";
     const data = new FormData();
     data.append("nombre", formData.nombre);
     data.append("apellidos", formData.apellidos);
@@ -46,7 +46,7 @@ export const Registro = () => {
     }
     try {
       // Comprobar si ya existe un usuario con el mismo nombre
-      const responseNombre = await axios.get(`http://127.0.0.1:8000/usuarios/nombre/${formData.nombre}`);
+      const responseNombre = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/nombre/${formData.nombre}`);
       if (responseNombre.status === 200) {
         if (responseNombre.data.nombre) {
           setError("Ya hay un usuario con ese nombre");
@@ -66,7 +66,7 @@ export const Registro = () => {
     
     try {
       // Comprobar si ya existe un usuario con el mismo correo electrónico
-      const responseEmail = await axios.get(`http://127.0.0.1:8000/usuarios/email/${formData.email}`);
+      const responseEmail = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/email/${formData.email}`);
       if (responseEmail.status === 200) {
         if (responseEmail.data.Email) {
           setError("Ya hay un usuario con ese email");
@@ -89,7 +89,7 @@ export const Registro = () => {
       const responsePost = await axios.post(url, data);
       if (responsePost.status === 200) {
         // Obtener información del usuario recién creado
-        const newUser = await axios.get(`http://127.0.0.1:8000/usuarios/nombre/${formData.nombre}`);
+        const newUser = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/nombre/${formData.nombre}`);
         if (newUser.status === 200) {
           const id = newUser.data.id;
           const nombre = newUser.data.nombre;

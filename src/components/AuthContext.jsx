@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUserAvatar = async (userId) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:8000/usuarios/imagen/${userId}`,
+        `https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/imagen/${userId}`,
         { responseType: 'arraybuffer' }
       );
       const blob = new Blob([response.data], { type: 'image/png' });
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (userData) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/usuarios/${userData.id}`);
+      const response = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/${userData.id}`);
       if (response.status === 200) {
         const usuarioCompleto = response.data;
         const avatarURL = await fetchUserAvatar(userData.id);

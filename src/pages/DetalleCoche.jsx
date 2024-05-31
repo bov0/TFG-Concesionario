@@ -18,23 +18,23 @@ const DetalleCoche = () => {
   useEffect(() => {
     const fetchCocheData = async () => {
       try {
-        const cocheResponse = await axios.get(`http://127.0.0.1:8000/coches/${cocheId}`);
+        const cocheResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/coches/${cocheId}`);
         const cocheData = cocheResponse.data;
 
-        const marcaResponse = await axios.get(`http://127.0.0.1:8000/marcas-coche/${cocheData.marca_id}`);
+        const marcaResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/${cocheData.marca_id}`);
         const marcaNombre = marcaResponse.data.nombreMarca;
 
-        const modeloResponse = await axios.get(`http://127.0.0.1:8000/modelos/${cocheData.modelo}`);
+        const modeloResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/${cocheData.modelo}`);
         const modeloNombre = modeloResponse.data.nombre;
 
-        const imagenResponse = await axios.get(`http://127.0.0.1:8000/imagenes-coche/imagen/${cocheId}`, { responseType: 'arraybuffer' });
+        const imagenResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/imagenes-coche/imagen/${cocheId}`, { responseType: 'arraybuffer' });
         const imagenBlob = new Blob([imagenResponse.data], { type: 'image/png' });
         const imagenURL = URL.createObjectURL(imagenBlob);
 
-        const vendedorResponse = await axios.get(`http://127.0.0.1:8000/usuarios/${cocheData.vendedor_id}`);
+        const vendedorResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/${cocheData.vendedor_id}`);
         const vendedorNombre = vendedorResponse.data.nombre
 
-        const vendedorAvatarResponse = await axios.get(`http://127.0.0.1:8000/usuarios/imagen/${cocheData.vendedor_id}`, { responseType: 'arraybuffer' });
+        const vendedorAvatarResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/imagen/${cocheData.vendedor_id}`, { responseType: 'arraybuffer' });
         const vendedorAvatarBlob = new Blob([vendedorAvatarResponse.data], { type: 'image/png' });
         const vendedorAvatarURL = URL.createObjectURL(vendedorAvatarBlob);
 

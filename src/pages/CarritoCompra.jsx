@@ -20,11 +20,11 @@ export const CarritoCompra = () => {
     dataVentas.append("coche_id", id_coche);
     dataVentas.append("comprador_id", id_usuario);
     //dataVentas tiene los datos que queremos introducir a la tabla ventas
-    const cocheDetailsResponse = await axios.get(`http://127.0.0.1:8000/coches/${coche.id}`);
+    const cocheDetailsResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/coches/${coche.id}`);
     const cocheDetails = cocheDetailsResponse.data;
-    const responseMarca = await axios.get(`http://127.0.0.1:8000/marcas-coche/nombre/${coche.marcaNombre}`);
+    const responseMarca = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/nombre/${coche.marcaNombre}`);
     const marcaId = responseMarca.data;
-    const responseModelo = await axios.get(`http://127.0.0.1:8000/modelos/nombre/${coche.modeloNombre}`);
+    const responseModelo = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/nombre/${coche.modeloNombre}`);
     const modeloId = responseModelo.data;
     // Crear un FormData para los detalles del coche vendido
     const dataCocheVendido = new FormData();
@@ -42,23 +42,23 @@ export const CarritoCompra = () => {
     dataCocheVendido.append("color", cocheDetails.color);
     dataCocheVendido.append("vendedor_id", user.id);
     try {
-      await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
+      await axios.post(`https://tfg-backend-4nkyb73jha-nw.a.run.app/cochesVendidos`, dataCocheVendido);
       eliminarDelCarrito(index);
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + cocheDetails.id);
     }
     try {
-      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);   
+      await axios.post(`https://tfg-backend-4nkyb73jha-nw.a.run.app/ventas`, dataVentas);
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + coche.id + " y comprador con id: " + user.id, error);
     }    
     try {
-      await axios.delete(`http://127.0.0.1:8000/imagenes-coche/byCar/${cocheDetails.id}`);      
+      await axios.delete(`https://tfg-backend-4nkyb73jha-nw.a.run.app/imagenes-coche/byCar/${cocheDetails.id}`);       
     } catch (error) {          
       console.error("Error al elimnar imagenes del coche con id: " + cocheDetails.id);
     }  
     try {
-      await axios.delete(`http://127.0.0.1:8000/coches/${cocheDetails.id}`);              
+      await axios.delete(`https://tfg-backend-4nkyb73jha-nw.a.run.app/coches/${cocheDetails.id}`);            
     } catch (error) {
       console.error("Error al eliminar el coche con id: " + coche.id);
     } 
