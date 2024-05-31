@@ -58,7 +58,7 @@ const DetalleCoche = () => {
         return;
       }
 
-      if (user.id == coche.vendedor_id) {
+      if (user.id === coche.vendedor_id) {
         setMensaje('No puedes comprarte a ti mismo el coche')
 
       } else {

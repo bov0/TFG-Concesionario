@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 
 const Tarjeta = ({
@@ -13,9 +13,15 @@ const Tarjeta = ({
   cajaCambios,
   combustible,
 }) => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate(`/coche/${id}`);
+  };
+
   return (
-    <NavLink to={`/coche/${id}`} className="flex justify-center hover:scale-[1.01] transition-all ease-in h-fit">
-      <Card isPressable className="py-4 h-min bg-default-50 shadow-xl rounded-xl">
+    <div className="flex justify-center hover:scale-[1.01] transition-all ease-in h-fit">
+      <Card isPressable onClick={handleNavigation} className="py-4 h-min bg-default-50 shadow-xl rounded-xl">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <h4 className="font-bold text-large">{marcaNombre} {modeloNombre}</h4>
           <p className="text-default-500 font-bold">{`Precio: ${precio}€`}</p>
@@ -36,7 +42,7 @@ const Tarjeta = ({
           </div>
         </CardBody>
       </Card>
-    </NavLink>
+    </div>
   );
 };
 
