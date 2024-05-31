@@ -43,12 +43,12 @@ const Inicio = () => {
         <img src={imagenes.Concesionario} alt="concesionario" className="w-[80%] lg:w-[50%] 2xl:w-[30%] rounded-xl shadow-xl" />
       </section>
 
-      <section className="flex flex-col 2xl:flex-row justify-center items-center gap-4 h-[40vh] w-[80%]">
+      <section className="flex flex-col 2xl:flex-row justify-center items-center gap-4 h-full xl:h-[60vh] w-[90%] lg:w-[80%]">
         <aside className="flex flex-col gap-5 shadow-xl p-14 backdrop-blur-3xl bg-white/30 rounded-xl w-[80%] lg:w-[50%] 2xl:w-full items-center justify-center">
-          <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
+          <p className="text-2xl xl:text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
             ¿Aun sigues buscando?
           </p>
-          <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
+          <p className="text-2xl xl:text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
             ¡A que esperas para buscar tu coche ideal!
           </p>
           <NavLink to="/NuestrosCoches">

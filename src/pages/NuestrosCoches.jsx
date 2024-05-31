@@ -11,7 +11,7 @@ const NuestrosCoches = () => {
   const [coches, setCoches] = useState([]);
   const [cargandoCoches, setCargandoCoches] = useState(true);
   const [paginaActual, setPaginaActual] = useState(1);
-  const cochesPorPagina = 8;
+  const cochesPorPagina = 12;
 
   const fetchData = useCallback(async () => {
     try {
@@ -84,7 +84,7 @@ const NuestrosCoches = () => {
       <div className="flex flex-col justify-items-center items-center w-full p-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-center items-center w-full">
           {cargandoCoches ? (
-            Array.from({ length: 8 }).map((_, index) => (
+            Array.from({ length: 12 }).map((_, index) => (
               <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
             ))
           ) : (
@@ -97,7 +97,7 @@ const NuestrosCoches = () => {
             </>
           )}
         </div>
-        <div className="flex justify-center w-full absolute bottom-20">
+        <div className="flex justify-center w-full m-5 lg:m-0">
           <Pagination
             total={Math.ceil(coches.length / cochesPorPagina)}
             initialPage={paginaActual}
