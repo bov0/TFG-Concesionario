@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Button } from "@nextui-org/react";
+import { useAuth } from '../components/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Registro = () => {
+  const [error, setError] = useState('');
+  const [hayError, setHayError] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
     apellidos: "",
@@ -38,13 +44,68 @@ export const Registro = () => {
     if (formData.fotoPerfil) {
       data.append("fotoPerfil", formData.fotoPerfil);
     }
-
     try {
-      await axios.post(url, data);
-      console.log("Usuario añadido con éxito");
+      // Comprobar si ya existe un usuario con el mismo nombre
+      const responseNombre = await axios.get(`http://127.0.0.1:8000/usuarios/nombre/${formData.nombre}`);
+      if (responseNombre.status === 200) {
+        if (responseNombre.data.nombre) {
+          setError("Ya hay un usuario con ese nombre");
+          setHayError(true);
+          return; // Detener la ejecución si ya hay un usuario con ese nombre
+        }
+      }
     } catch (error) {
+      // Si se produce un error diferente de 404, manejarlo y detener la ejecución
+      if (error.response && error.response.status !== 404) {
+        setError("Error al verificar el nombre de usuario");
+        setHayError(true);
+        console.error("Error al verificar el nombre de usuario:", error.message);
+        return;
+      }
+    }
+    
+    try {
+      // Comprobar si ya existe un usuario con el mismo correo electrónico
+      const responseEmail = await axios.get(`http://127.0.0.1:8000/usuarios/email/${formData.email}`);
+      if (responseEmail.status === 200) {
+        if (responseEmail.data.Email) {
+          setError("Ya hay un usuario con ese email");
+          setHayError(true);
+          return; // Detener la ejecución si ya hay un usuario con ese email
+        }
+      }
+    } catch (error) {
+      // Si se produce un error diferente de 404, manejarlo y detener la ejecución
+      if (error.response && error.response.status !== 404) {
+        setError("Error al verificar el email de usuario");
+        setHayError(true);
+        console.error("Error al verificar el email de usuario:", error.message);
+        return;
+      }
+    }
+    
+    // Si no se encontraron usuarios con el mismo nombre ni correo electrónico, hacer el POST
+    try {
+      const responsePost = await axios.post(url, data);
+      if (responsePost.status === 200) {
+        // Obtener información del usuario recién creado
+        const newUser = await axios.get(`http://127.0.0.1:8000/usuarios/nombre/${formData.nombre}`);
+        if (newUser.status === 200) {
+          const id = newUser.data.id;
+          const nombre = newUser.data.nombre;
+          const userData = { id, nombre };
+          login(userData);
+          navigate('/');
+          console.log("Usuario añadido con éxito", id, nombre);
+        }
+      }
+    } catch (error) {
+      // Manejar errores de red u otros errores
+      setError("Error al registrarse");
+      setHayError(true);
       console.error("Error al añadir usuario:", error.message);
     }
+     
   };
 
   return (
@@ -97,47 +158,8 @@ export const Registro = () => {
             >
               Correo Electrónico
             </label>
-          </div>
+          </div>          
           <div className="grid grid-cols-2 gap-3 md:gap-6 w-fit justify-center">
-            <div className="relative z-0 w-full mb-5 group">
-              <input
-                type="password"
-                name="contrasena"
-                id="contrasena"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
-                value={formData.contrasena}
-                onChange={handleChange}
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="contrasena"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Contraseña
-              </label>
-            </div>
-            <div className="relative z-0 w-full mb-5 group">
-              <input
-                type="password"
-                name="repetir_contrasena"
-                id="repetir_contrasena"
-                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
-                value={formData.repetir_contrasena}
-                onChange={handleChange}
-                placeholder=" "
-                required
-              />
-              <label
-                htmlFor="repetir_contrasena"
-                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Repetir Contraseña
-              </label>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-3 md:gap-6 w-fit justify-center">
-            <div className="grid grid-cols-2 gap-3 md:gap-6">
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="text"
@@ -185,14 +207,55 @@ export const Registro = () => {
                 />
               </div>
             </div>
-            <Button
+            <div className="grid grid-cols-2 gap-3 md:gap-6 w-fit justify-center">
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="password"
+                name="contrasena"
+                id="contrasena"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+                value={formData.contrasena}
+                onChange={handleChange}
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="contrasena"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Contraseña
+              </label>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+              <input
+                type="password"
+                name="repetir_contrasena"
+                id="repetir_contrasena"
+                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-pink-500 focus:outline-none focus:ring-0 focus:border-purple-600 peer"
+                value={formData.repetir_contrasena}
+                onChange={handleChange}
+                placeholder=" "
+                required
+              />
+              <label
+                htmlFor="repetir_contrasena"
+                className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-purple-600 peer-focus:dark:text-pink-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Repetir Contraseña
+              </label>
+            </div>
+          </div>
+          <Button
               type="submit"
               className=" bg-lime-200 font-bold shadow-xl w-fit mx-auto"
             >
               REGISTRARSE
             </Button>
-          </div>
+            {hayError && (
+                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-16'>{error}</p>
+                    )}
         </form>
+        
       </div>
     </div>
   );

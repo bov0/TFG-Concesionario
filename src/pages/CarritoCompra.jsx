@@ -8,7 +8,6 @@ import axios from "axios";
 
 export const CarritoCompra = () => {
   const { carrito, setCarrito } = useCarrito();
-
   const { user } = useAuth();
 
   const confirmarCompra = async (coche, index) => {
@@ -43,27 +42,23 @@ export const CarritoCompra = () => {
     dataCocheVendido.append("color", cocheDetails.color);
     dataCocheVendido.append("vendedor_id", user.id);
     try {
-      const addToCochesVendidos = await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
+      await axios.post(`http://127.0.0.1:8000/cochesVendidos`, dataCocheVendido);
       eliminarDelCarrito(index);
-      console.log("Añadido a cochesVendidos");
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + cocheDetails.id);
     }
     try {
-      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);
-      console.log("Añadido a ventas");     
+      await axios.post(`http://127.0.0.1:8000/ventas`, dataVentas);   
     } catch (error) {
       console.error("Error al confirmar la compra del coche con id: " + coche.id + " y comprador con id: " + user.id, error);
     }    
     try {
-      const deleteImgs = await axios.delete(`http://127.0.0.1:8000/imagenes-coche/byCar/${cocheDetails.id}`);
-      console.log("Imagenes eliminadas");        
+      await axios.delete(`http://127.0.0.1:8000/imagenes-coche/byCar/${cocheDetails.id}`);      
     } catch (error) {          
       console.error("Error al elimnar imagenes del coche con id: " + cocheDetails.id);
     }  
     try {
-      const deleteFromCoches = await axios.delete(`http://127.0.0.1:8000/coches/${cocheDetails.id}`);
-      console.log("Eliminado de coches");                
+      await axios.delete(`http://127.0.0.1:8000/coches/${cocheDetails.id}`);              
     } catch (error) {
       console.error("Error al eliminar el coche con id: " + coche.id);
     } 
