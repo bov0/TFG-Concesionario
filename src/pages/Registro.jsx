@@ -272,7 +272,7 @@ export const Registro = () => {
               REGISTRARSE
             </Button>    
             {hayError && (
-                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-0'>{error}</p>
+                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-xs text-white text-center absolute bottom-4'>{error}</p>
                     )}        
         </form>        
       </div>
