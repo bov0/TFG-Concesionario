@@ -44,23 +44,20 @@ export const Registro = () => {
     if (formData.fotoPerfil) {
       data.append("fotoPerfil", formData.fotoPerfil);
     }
+    let errorMessage = "";
     try {
       // Comprobar si ya existe un usuario con el mismo nombre
       const responseNombre = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/nombre/${formData.nombre}`);
       if (responseNombre.status === 200) {
         if (responseNombre.data.nombre) {
-          setError("Ya hay un usuario con ese nombre");
-          setHayError(true);
-          return; // Detener la ejecución si ya hay un usuario con ese nombre
+          errorMessage += "Ya hay un usuario con ese nombre. ";
         }
       }
     } catch (error) {
       // Si se produce un error diferente de 404, manejarlo y detener la ejecución
       if (error.response && error.response.status !== 404) {
-        setError("Error al verificar el nombre de usuario");
-        setHayError(true);
+        errorMessage +=  "Error al verificar el nombre de usuario. ";
         console.error("Error al verificar el nombre de usuario:", error.message);
-        return;
       }
     }
     
@@ -69,21 +66,44 @@ export const Registro = () => {
       const responseEmail = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/email/${formData.email}`);
       if (responseEmail.status === 200) {
         if (responseEmail.data.Email) {
-          setError("Ya hay un usuario con ese email");
+          errorMessage += "Ya hay un usuario con ese email. ";
           setHayError(true);
-          return; // Detener la ejecución si ya hay un usuario con ese email
         }
       }
     } catch (error) {
       // Si se produce un error diferente de 404, manejarlo y detener la ejecución
       if (error.response && error.response.status !== 404) {
-        setError("Error al verificar el email de usuario");
-        setHayError(true);
+        errorMessage += "Error al verificar el email de usuario. ";
         console.error("Error al verificar el email de usuario:", error.message);
-        return;
       }
     }
     
+    // Comprobar la contraseña    
+    const contrasenaMayuscRegex = /^(?=.*[A-Z])/;
+    const contrasenaNumberRegex = /^(?=.*\d)/;
+    const contrasenaSpecialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    const contrasenaMinLengthRegex = /^.{8,}$/;
+    if (!contrasenaMayuscRegex.test(formData.contrasena)) {
+      errorMessage += "La contraseña debe contener al menos una letra mayúscula. ";
+    }
+    if (!contrasenaNumberRegex.test(formData.contrasena)) {
+      errorMessage += "La contraseña debe contener al menos un número. ";
+    }
+
+    if (!contrasenaSpecialCharRegex.test(formData.contrasena)) {
+      errorMessage += "La contraseña debe contener al menos un carácter especial. ";
+    }
+
+    if (!contrasenaMinLengthRegex.test(formData.contrasena)) {
+      errorMessage += "La contraseña debe contener al menos 8 carácteres. ";
+    }
+
+    if (errorMessage) {
+      setError(errorMessage);
+      setHayError(true);
+      return; // Detener la ejecución si la contraseña no es válida
+    }
+
     // Si no se encontraron usuarios con el mismo nombre ni correo electrónico, hacer el POST
     try {
       const responsePost = await axios.post(url, data);
@@ -137,7 +157,7 @@ export const Registro = () => {
         <form
           className="md:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl"
           onSubmit={handleSubmit}
-        >
+        >          
           <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800">
             Registrarse
           </h1>
@@ -250,12 +270,11 @@ export const Registro = () => {
               className=" bg-lime-200 font-bold shadow-xl w-fit mx-auto"
             >
               REGISTRARSE
-            </Button>
+            </Button>    
             {hayError && (
-                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-16'>{error}</p>
-                    )}
-        </form>
-        
+                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-0'>{error}</p>
+                    )}        
+        </form>        
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export const Login = () => {
                     const id = response.data.id;
                     const userData = { id, nombre };
                     login(userData);
-                    navigate('/'); // Redirige al usuario a la página de inicio
+                    navigate('/'); 
                 } else {
                     setError("La contraseña ingresada es incorrecta");
                     setHayError(true);
