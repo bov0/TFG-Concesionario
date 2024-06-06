@@ -172,7 +172,7 @@ export const CompraCoches = () => {
   return (
     <div className="h-dvh flex flex-col justify-center items-center gap-4">
       <div className="shadow-2xl rounded-2xl flex flex-col justify-center items-center md:flex-row gap-0 w-full md:w-fit min-h-min backdrop-blur-3xl bg-white/30">
-        <div className="hidden md:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
+        <div className="hidden lg:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
           <div className="h-52 w-[80%] bg-blue-950 rounded-full shadow-xl absolute left-0 top-16 z-10">
             <div className="h-36 w-80 backdrop-blur-xl bg-white/30 shadow-xl absolute left-0 top-10 z-30"></div>
           </div>
@@ -187,11 +187,11 @@ export const CompraCoches = () => {
           <p className="absolute top-20 left-36 z-40 font-extrabold text-6xl text-lime-200">*</p>
           <p className="absolute top-96 left-16 z-40 font-extrabold text-6xl text-blue-950">*</p>
         </div>
-        <div className="md:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl">
+        <div className="lg:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl">
           <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800">
             Vende tu coche
           </h1>
-          <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
+          <form className="lg:max-w-md mx-auto" onSubmit={handleSubmit}>
             <div className="grid grid-cols-2 gap-6 mt-5">
               <div className="relative z-0 w-full mb-5 group">
                 <Parametro nombre="Marca" tipo="Select" opciones={opcionesMarcas.map(marca => marca.nombreMarca)} variant="underlined" onChange={ManejoCambioMarca} />
@@ -254,7 +254,7 @@ export const CompraCoches = () => {
                 <Parametro nombre="Distintivo Ambiental" tipo="Select" opciones={opcionesDistAmbiental} variant="underlined" onChange={(value) => handleChange("distAmbiental", value)} />
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-6 items-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 items-center">
               <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="number"

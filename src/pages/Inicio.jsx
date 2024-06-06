@@ -1,9 +1,15 @@
 import React from "react";
 import imagenes from "../assets/imagenes";
 import { Button } from "@nextui-org/react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Inicio = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate('/NuestrosCoches');
+  };
+
   return (
     <div className="flex flex-col justify-center items-center mx-auto md:w-8/12">
       <section className="w-8/12 text-center h-[95vh] flex flex-col justify-center items-center relative">
@@ -43,7 +49,7 @@ const Inicio = () => {
         <img src={imagenes.Concesionario} alt="concesionario" className="w-[80%] lg:w-[50%] 2xl:w-[30%] rounded-xl shadow-xl" />
       </section>
 
-      <section className="flex flex-col 2xl:flex-row justify-center items-center gap-4 h-full xl:h-[60vh] w-[90%] lg:w-[80%]">
+      <section className="flex flex-col 2xl:flex-row justify-center items-center gap-4 h-full xl:h-[60vh] lg:w-[80%]">
         <aside className="flex flex-col gap-5 shadow-xl p-14 backdrop-blur-3xl bg-white/30 rounded-xl w-[80%] lg:w-[50%] 2xl:w-full items-center justify-center">
           <p className="text-2xl xl:text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
             ¿Aun sigues buscando?
@@ -51,9 +57,7 @@ const Inicio = () => {
           <p className="text-2xl xl:text-3xl font-extrabold text-transparent bg-clip-text bg-indigo-400 w-[80%] text-center">
             ¡A que esperas para buscar tu coche ideal!
           </p>
-          <NavLink to="/NuestrosCoches">
-            <Button className="w-fit font-bold bg-lime-300 shadow-xl">Explorar</Button>
-          </NavLink>
+            <Button onClick={handleNavigation} className="w-fit font-bold bg-lime-300 shadow-xl">Explorar</Button>
         </aside>
       </section>
     </div>
