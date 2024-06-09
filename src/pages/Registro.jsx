@@ -131,7 +131,7 @@ export const Registro = () => {
   return (
     <div className="h-dvh flex justify-center items-center">
       <div className="shadow-2xl rounded-2xl flex flex-col justify-center items-center md:flex-row gap-0 w-full md:w-fit min-h-min backdrop-blur-3xl bg-white/30">
-        <div className="hidden md:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
+        <div className="hidden lg:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
           <div className="h-52 w-[80%] bg-blue-950 rounded-full shadow-xl absolute left-0 top-16 z-10">
             <div className="h-36 w-80 backdrop-blur-xl bg-white/30 shadow-xl absolute left-0 top-10 z-30"></div>
           </div>
@@ -155,7 +155,7 @@ export const Registro = () => {
           </p>
         </div>
         <form
-          className="md:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl"
+          className="lg:w-6/12 h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl"
           onSubmit={handleSubmit}
         >          
           <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800">
@@ -272,7 +272,7 @@ export const Registro = () => {
               REGISTRARSE
             </Button>    
             {hayError && (
-                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-white text-center absolute bottom-0'>{error}</p>
+                        <p className='p-2 rounded-xl bg-danger-500 font-bold text-xs text-white text-center absolute bottom-4'>{error}</p>
                     )}        
         </form>        
       </div>

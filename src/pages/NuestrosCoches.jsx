@@ -85,7 +85,9 @@ const NuestrosCoches = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-center items-center w-full">
           {cargandoCoches ? (
             Array.from({ length: 12 }).map((_, index) => (
-              <Skeleton key={index} className="w-[280px] h-[350px] rounded-lg m-10" />
+              <div key={index} className="flex justify-center hover:scale-[1.01] transition-all ease-in h-fit">
+              <Skeleton key={index} className="w-[120%] h-[250px] lg:w-[280px] lg:h-[350px] rounded-lg m-10" />
+              </div>
             ))
           ) : (
             <>

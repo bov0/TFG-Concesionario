@@ -49,7 +49,7 @@ export const Login = () => {
     return (
         <div className='h-dvh flex flex-col justify-center items-center mx-auto md:w-8/12'>
             <div className='shadow-2xl rounded-2xl flex flex-col justify-center items-center md:flex-row gap-0 w-full md:w-fit min-h-min backdrop-blur-3xl bg-white/30'>
-                <div className="hidden md:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
+                <div className="hidden lg:block min-h-full w-6/12 mx-auto p-72 bg-default-100 rounded-l-2xl m-0 relative">
                     <div className="h-52 w-[80%] bg-blue-950 rounded-full shadow-xl absolute left-0 top-16 z-10">
                         <div className="h-36 w-80 backdrop-blur-xl bg-white/30 shadow-xl absolute left-0 top-10 z-30"></div>
                     </div>
@@ -64,7 +64,7 @@ export const Login = () => {
                     <p className="absolute top-20 left-36 z-40 font-extrabold text-6xl text-lime-200">*</p>
                     <p className="absolute top-96 left-16 z-40 font-extrabold text-6xl text-blue-950">*</p>
                 </div>
-                <div className='flex items-center justify-center flex-col w-6/12 md:px-40'>
+                <div className='flex items-center justify-center flex-col p-12 lg:p-0 w-full lg:w-6/12 md:px-40'>
                     <h1 className='w-full text-center text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-800'>Iniciar Sesion</h1>
                     <form className="w-full h-full mx-auto flex flex-col items-center gap-4 p-9 m-0 rounded-xl md:rounded-l-none md:rounded-r-2xl" onSubmit={handleSubmit}>
                         <div className="relative z-0 w-full mb-5 group">
