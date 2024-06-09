@@ -79,14 +79,14 @@ const NuestrosCoches = () => {
   const cambiarPagina = (numeroPagina) => setPaginaActual(numeroPagina);
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full 2xl:h-[133.7vh]">
       <Sidebar />
-      <div className="flex flex-col justify-items-center items-center w-full p-4">
+      <div className="flex flex-col justify-items-center items-center w-full h-full p-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-center items-center w-full">
           {cargandoCoches ? (
             Array.from({ length: 12 }).map((_, index) => (
               <div key={index} className="flex justify-center hover:scale-[1.01] transition-all ease-in h-fit">
-              <Skeleton key={index} className="w-[120%] h-[250px] lg:w-[280px] lg:h-[350px] rounded-lg m-10" />
+              <Skeleton key={index} className="w-[120%] h-[250px] lg:w-[280px] lg:h-[350px] rounded-lg" />
               </div>
             ))
           ) : (
