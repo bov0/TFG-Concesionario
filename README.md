@@ -10,7 +10,6 @@ Bienvenido al repositorio del frontend de GMC, una aplicación web desarrollada 
 - [Scripts Disponibles](#scripts-disponibles)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 - [Contribución](#contribución)
-- [Licencia](#licencia)
 
 ## Instalación
 
@@ -46,23 +45,48 @@ Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación en e
 
 El proyecto está organizado de la siguiente manera:
 
-gmc-frontend/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── AuthContext.js
-│   │   ├── FiltrosContext.js
-│   │   ├── Parametro.js
-│   │   └── ...
-│   ├── pages/
-│   │   ├── ComprasVentas.js
-│   │   ├── NuestrosCoches.js
-│   │   └── ...
-│   ├── App.js
-│   ├── index.js
-│   └── ...
-├── .gitignore
-├── package.json
-└── README.md
+gmc-frontend/ ⋅⋅
+├── public/ ⋅⋅
+│   ├── index.html ⋅⋅
+│   └── ... ⋅⋅
+├── src/ ⋅⋅
+│   ├── components/ ⋅⋅
+│   │   ├── AuthContext.js ⋅⋅
+│   │   ├── FiltrosContext.js ⋅⋅
+│   │   ├── Parametro.js ⋅⋅
+│   │   └── ... ⋅⋅
+│   ├── pages/ ⋅⋅
+│   │   ├── ComprasVentas.js ⋅⋅
+│   │   ├── NuestrosCoches.js ⋅⋅
+│   │   └── ... ⋅⋅
+│   ├── App.js ⋅⋅
+│   ├── index.js ⋅⋅
+│   └── ... ⋅⋅
+├── .gitignore ⋅⋅
+├── package.json ⋅⋅
+└── README.md ⋅⋅
+
+## Scripts Disponibles
+
+En el directorio del proyecto, puedes ejecutar:
+
+    npm start: Inicia la aplicación en modo de desarrollo.
+    npm test: Inicia el corredor de pruebas.
+    npm run build: Construye la aplicación para producción en la carpeta build.
+
+## Tecnologías Utilizadas
+
+    React: Biblioteca principal para la construcción de la interfaz de usuario.
+    Axios: Cliente HTTP para realizar peticiones al backend.
+    NextUI: Biblioteca de componentes UI para React.
+    React Router: Manejo de rutas en la aplicación.
+
+## Contribución
+
+¡Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, por favor sigue estos pasos:
+
+    Haz un fork del proyecto.
+    Crea una nueva rama (git checkout -b feature/nueva-funcionalidad).
+    Realiza tus cambios y haz commit (git commit -m 'Agrega nueva funcionalidad').
+    Empuja tus cambios a la rama (git push origin feature/nueva-funcionalidad).
+    Abre un Pull Request.
