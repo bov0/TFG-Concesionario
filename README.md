@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# GMC - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bienvenido al repositorio del frontend de GMC, una aplicación web desarrollada con React para la compraventa de vehículos. Este proyecto surge como respuesta a la insatisfacción con las opciones existentes en línea para la compraventa de vehículos, ofreciendo una experiencia más cómoda y agradable.
 
-## Available Scripts
+## Tabla de Contenidos
 
-In the project directory, you can run:
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Estructura del Proyecto](#estructura-del-proyecto)
+- [Scripts Disponibles](#scripts-disponibles)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
+- [Contribución](#contribución)
+- [Licencia](#licencia)
 
-### `npm start`
+## Instalación
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clona el repositorio:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    ```bash
+    git clone https://github.com/bov0/TFG-Concesionario.git
+    ```
 
-### `npm test`
+2. Navega al directorio del proyecto:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    ```bash
+    cd .\TFG-Concesionario\
+    ```
 
-### `npm run build`
+3. Instala las dependencias:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    npm install
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Uso
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para iniciar la aplicación en modo de desarrollo, ejecuta:
 
-### `npm run eject`
+    ```bash
+    npm start
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación en el navegador. La página se recargará automáticamente si realizas cambios en el código.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Estructura del Proyecto
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+El proyecto está organizado de la siguiente manera:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+gmc-frontend/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── AuthContext.js
+│   │   ├── FiltrosContext.js
+│   │   ├── Parametro.js
+│   │   └── ...
+│   ├── pages/
+│   │   ├── ComprasVentas.js
+│   │   ├── NuestrosCoches.js
+│   │   └── ...
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+├── .gitignore
+├── package.json
+└── README.md
