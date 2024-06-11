@@ -45,26 +45,26 @@ Abre [http://localhost:3000](http://localhost:3000) para ver la aplicación en e
 
 El proyecto está organizado de la siguiente manera:
 
-gmc-frontend/ ██
-├── public/ ██
-│   ├── index.html ██
-│   └── ... ██
-├── src/ ██
-│   ├── components/ ██
-│   │   ├── AuthContext.js ██
-│   │   ├── FiltrosContext.js ██
-│   │   ├── Parametro.js ██
-│   │   └── ... ██
-│   ├── pages/ ██
-│   │   ├── ComprasVentas.js ██
-│   │   ├── NuestrosCoches.js ██
-│   │   └── ... ██
-│   ├── App.js ██
-│   ├── index.js ██
-│   └── ... ██
-├── .gitignore ██
-├── package.json ██
-└── README.md ██
+gmc-frontend/  
+├── public/  
+│   ├── index.html  
+│   └── ...  
+├── src/  
+│   ├── components/  
+│   │   ├── AuthContext.js  
+│   │   ├── FiltrosContext.js  
+│   │   ├── Parametro.js  
+│   │   └── ...  
+│   ├── pages/  
+│   │   ├── ComprasVentas.js  
+│   │   ├── NuestrosCoches.js  
+│   │   └── ...  
+│   ├── App.js  
+│   ├── index.js  
+│   └── ...  
+├── .gitignore  
+├── package.json  
+└── README.md  
 
 ## Scripts Disponibles
 
