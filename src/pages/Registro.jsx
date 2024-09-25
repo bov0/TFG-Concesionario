@@ -35,7 +35,7 @@ export const Registro = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = "https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios";
+    const url = "https://tfg-backendconcesionario.onrender.com/usuarios";
     const data = new FormData();
     data.append("nombre", formData.nombre);
     data.append("apellidos", formData.apellidos);

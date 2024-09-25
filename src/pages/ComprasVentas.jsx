@@ -13,18 +13,18 @@ export const ComprasVentas = () => {
         const fetchCochesCompradosData = async (userId) => {
             try {
                 // Obtener los coches comprados
-                const comprasResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/compras/${userId}`);
+                const comprasResponse = await axios.get(`https://tfg-backendconcesionario.onrender.com/compras/${userId}`);
                 const cochesComprados = comprasResponse.data;
 
                 // Obtener detalles de cada coche
                 const cocheDetailsPromises = cochesComprados.map(async (compra) => {
                     try {
-                        const cocheResponse = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/cochesVendidos/${compra.coche_id}`);
+                        const cocheResponse = await axios.get(`https://tfg-backendconcesionario.onrender.com/cochesVendidos/${compra.coche_id}`);
                         const coche = cocheResponse.data;
 
                         const [marcaResult, modeloResult] = await Promise.all([
-                            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/${coche.marca_id}`),
-                            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/${coche.modelo}`)
+                            axios.get(`https://tfg-backendconcesionario.onrender.com/marcas-coche/${coche.marca_id}`),
+                            axios.get(`https://tfg-backendconcesionario.onrender.com/modelos/${coche.modelo}`)
                         ]);
 
                         const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';
@@ -52,12 +52,12 @@ export const ComprasVentas = () => {
 
         const fetchCochesVendidosData = async () => {
             try {
-                const cochesVendidos = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/coches-vendidos/${user.id}`);
+                const cochesVendidos = await axios.get(`https://tfg-backendconcesionario.onrender.com/coches-vendidos/${user.id}`);
                 const ventasConDetalles = await Promise.all(cochesVendidos.data.map(async (coche) => {
                     try {
                         const [marcaResult, modeloResult] = await Promise.all([
-                            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/${coche.marca_id}`),
-                            axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/${coche.modelo}`)
+                            axios.get(`https://tfg-backendconcesionario.onrender.com/marcas-coche/${coche.marca_id}`),
+                            axios.get(`https://tfg-backendconcesionario.onrender.com/modelos/${coche.modelo}`)
                         ]);
 
                         const marcaNombre = marcaResult.data.nombreMarca || 'Error marca';

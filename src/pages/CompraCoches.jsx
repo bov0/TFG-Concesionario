@@ -61,9 +61,9 @@ export const CompraCoches = () => {
     const url = "https://tfg-backend-4nkyb73jha-nw.a.run.app/coches";
     const data = new FormData();
     //Sacamos el id de la marca y modelo con lo que se escribe en el formulario
-    const responseMarca = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche/nombre/${formData.marca}`);
+    const responseMarca = await axios.get(`https://tfg-backendconcesionario.onrender.com/marcas-coche/nombre/${formData.marca}`);
     const marcaId = responseMarca.data;
-    const responseModelo = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelos/nombre/${formData.modelo}`);
+    const responseModelo = await axios.get(`https://tfg-backendconcesionario.onrender.com/modelos/nombre/${formData.modelo}`);
     const modeloId = responseModelo.data;
     data.append("marca_id", marcaId);
     data.append("modelo", modeloId);
@@ -80,8 +80,8 @@ export const CompraCoches = () => {
     try {
       await axios.post(url, data);
       // Despues de añadir el coche utilizamos su id nuevo para cargar la imagen en la bbdd
-      const response = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/lastCoche");
-      const urlImg = "https://tfg-backend-4nkyb73jha-nw.a.run.app/imagenes-coche";
+      const response = await axios.get("https://tfg-backendconcesionario.onrender.com/lastCoche");
+      const urlImg = "https://tfg-backendconcesionario.onrender.com/imagenes-coche";
       const dataImg = new FormData();
       console.log(response.data.id);
       dataImg.append("coche_id", response.data.id);
@@ -125,7 +125,7 @@ export const CompraCoches = () => {
         return;
       }
 
-      const response = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelosMarca/${marcaSeleccionada.id}`);
+      const response = await axios.get(`https://tfg-backendconcesionario.onrender.com/modelosMarca/${marcaSeleccionada.id}`);
       handleChange("marca", NombreMarcaSeleccionada);
       setOpcionesModelos(response.data.map((modelo) => modelo.nombre));
     } catch (error) {
@@ -136,22 +136,22 @@ export const CompraCoches = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const opcionesMarcasResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche");
+        const opcionesMarcasResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/marcas-coche");
         setOpcionesMarcas(opcionesMarcasResponse.data);
 
-        const opcionesCajaCambiosResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesCajaCambios");
+        const opcionesCajaCambiosResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesCajaCambios");
         setOpcionesCajaCambios(opcionesCajaCambiosResponse.data);
 
-        const opcionesCombustibleResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesCombustible");
+        const opcionesCombustibleResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesCombustible");
         setOpcionesCombustible(opcionesCombustibleResponse.data);
 
-        const opcionesDistAmbientalResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesDistAmbiental");
+        const opcionesDistAmbientalResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesDistAmbiental");
         setOpcionesDistAmbiental(opcionesDistAmbientalResponse.data);
 
-        const opcionesTipoCarrResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesTipoCarr");
+        const opcionesTipoCarrResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesTipoCarr");
         setOpcionesTipoCarr(opcionesTipoCarrResponse.data);
 
-        const opcionesColorResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesColor");
+        const opcionesColorResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesColor");
         setOpcionesColor(opcionesColorResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);

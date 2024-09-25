@@ -54,7 +54,7 @@ export const Ajustes = () => {
     }
 
     try {
-      await axios.put(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/${usuario.id}`, formData);
+      await axios.put(`https://tfg-backendconcesionario.onrender.com/usuarios/${usuario.id}`, formData);
       setMensaje("Se han actualizado los cambios");
       console.log(data.isPasswordChange ? "Contraseña actualizada exitosamente" : "Usuario actualizado exitosamente");
 
@@ -70,7 +70,7 @@ export const Ajustes = () => {
   const handleSubmit = async (event, isPasswordChange) => {
     event.preventDefault();
     try {
-      const { data: usuario } = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/usuarios/email/${user.Email}`);
+      const { data: usuario } = await axios.get(`https://tfg-backendconcesionario.onrender.com/usuarios/email/${user.Email}`);
       if (usuario && (!isPasswordChange || usuario.contrasena === passwordOld)) {
         setEmail(user.Email);
         await updateUserData(usuario, { email, nombre, apellidos, passwordNew, fotoPerfil, isPasswordChange });

@@ -51,7 +51,7 @@ export const Sidebar = () => {
         return;
       }
 
-      const response = await axios.get(`https://tfg-backend-4nkyb73jha-nw.a.run.app/modelosMarca/${marcaSeleccionada.id}`);
+      const response = await axios.get(`https://tfg-backendconcesionario.onrender.com/modelosMarca/${marcaSeleccionada.id}`);
       setOpcionesModelos(response.data.map((modelo) => modelo.nombre));
 
       setFiltros(prevState => ({ ...prevState, Marca: NombreMarcaSeleccionada }));
@@ -159,22 +159,22 @@ export const Sidebar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const opcionesMarcasResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/marcas-coche");
+        const opcionesMarcasResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/marcas-coche");
         setOpcionesMarcas(opcionesMarcasResponse.data);
 
-        const opcionesCajaCambiosResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesCajaCambios");
+        const opcionesCajaCambiosResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesCajaCambios");
         setOpcionesCajaCambios(opcionesCajaCambiosResponse.data);
 
-        const opcionesCombustibleResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesCombustible");
+        const opcionesCombustibleResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesCombustible");
         setOpcionesCombustible(opcionesCombustibleResponse.data);
 
-        const opcionesDistAmbientalResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesDistAmbiental");
+        const opcionesDistAmbientalResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesDistAmbiental");
         setOpcionesDistAmbiental(opcionesDistAmbientalResponse.data);
 
-        const opcionesTipoCarrResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesTipoCarr");
+        const opcionesTipoCarrResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesTipoCarr");
         setOpcionesTipoCarr(opcionesTipoCarrResponse.data);
 
-        const opcionesColorResponse = await axios.get("https://tfg-backend-4nkyb73jha-nw.a.run.app/opcionesColor");
+        const opcionesColorResponse = await axios.get("https://tfg-backendconcesionario.onrender.com/opcionesColor");
         setOpcionesColor(opcionesColorResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);
