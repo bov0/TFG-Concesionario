@@ -84,9 +84,9 @@ const NuestrosCoches = () => {
       <div className="flex flex-col justify-items-center items-center w-full h-full p-4">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-2 gap-4 justify-center items-center w-full">
           {cargandoCoches ? (
-            <div className="absolute z-30 left-2/4 w-64 shadow-2xl bg-danger-500 transition-all rounded-xl p-2">
+            <div className="absolute z-30 left-2/4 w-64 shadow-2xl bg-danger-500 transition-all rounded-xl p-4">
               <p className="font-bold text-white text-center">CARGANDO COCHES</p>
-                <p className="font-bold text-white text-center">Por favor paciencia, esta página depende de una BBDD gratuita la cual no dispone de mucha velocidad, perdon por las inconveniencias, 
+                <p className="font-bold p-4 text-white">Por favor paciencia, esta página depende de una BBDD gratuita la cual no dispone de mucha velocidad, perdon por las inconveniencias.
               </p>
                 <p className="font-bold text-white text-center">TIEMPO EST: 1min</p>
             </div>
